@@ -10,17 +10,13 @@ MedicalInfo.init({
         primaryKey: true,
         unique: true,
     },
-    bloodGroup: {
-        type: DataTypes.STRING(5), 
-        allowNull: true,
-    },
     bloodType: {
         type: DataTypes.STRING(5), 
-        allowNull: true,
+        allowNull: false,
     },
     genotype: {
         type: DataTypes.STRING(5), 
-        allowNull: true,
+        allowNull: false,
     },
     allergies: {
         type: DataTypes.JSON, 
