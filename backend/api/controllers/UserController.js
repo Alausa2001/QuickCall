@@ -1,5 +1,6 @@
 const { mysqldb } = require('../../models/engine/mysql');
 const { User, MedicalInfo} = require('../../models/associations');
+const validate = require('../utils/validate_phoneno')
 
 
 class UserController {

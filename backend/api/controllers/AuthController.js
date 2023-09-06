@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const { v4 } = require('uuid');
 const { User } = require('../../models/associations');
 const { mysqldb } = require('../../models/engine/mysql');
+const validatePhoneNo = require('../utils/validate_phoneno')
 
 class AuthController {
     static async signup(req, res) {
@@ -36,6 +37,22 @@ class AuthController {
             res.status(400).json({ status: 'bad request', message: 'main phone number missing' });
             return;
         }
+
+        let data = await validatePhoneNo(phoneNo1)
+        if (data === null || (!data.carrier))  {
+            res.status(400).json({ status: 'bad request', message: 'phone number 1 invalid' });
+            return
+        }
+
+        
+        if (phoneNo2) {
+            data = await validatePhoneNo(phoneNo2)
+            if (data === null || (!data.carrier))  {
+                res.status(400).json({ status: 'bad request', message: 'phone number 2 invalid' });
+                return
+            } 
+        }
+
         const filter = { email, username };
 
         const user = await mysqldb.get(User, filter);
