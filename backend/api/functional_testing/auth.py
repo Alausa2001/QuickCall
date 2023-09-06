@@ -5,8 +5,8 @@ from sys import argv
 
 def signup():
     data = {
-        'firstName': 'abdul', 'lastName': 'abdul', 'username': 'abdul', 'phoneNo1': '8160969769',
-        'email': 'oluwaferanmialausa2001@gmail.com', 'password': 'abdul', 'phoneNo2': '7019302484'
+        'firstName': 'abdul', 'lastName': 'abdul', 'username': 'abdul', 'phoneNo1': '08160969769',
+        'email': 'oluwaferanmialausa2001@gmail.com', 'password': 'abdul', 'phoneNo2': '07019302484'
     }
     header = {'Content-Type': 'application/json'}
     res = requests.post('http://localhost:4000/api/v1/auth/signup', headers=header, json=data)
@@ -14,7 +14,7 @@ def signup():
     print(dumps(res.json(), indent=4))
 
 def signin():
-    data = {'username': 'abdul', 'password': 'abdul'}
+    data = {'username': 'abdul1', 'password': 'abdul1'}
     header = {'Content-Type': 'application/json'}
     res = requests.post('http://localhost:4000/api/v1/auth/signin', headers=header, json=data)
     print(res.headers.get('Authorization'))

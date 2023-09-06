@@ -53,13 +53,21 @@ class AuthController {
             } 
         }
 
-        const filter = { email, username };
+        const filter = { email };
 
         const user = await mysqldb.get(User, filter);
         if (user) {
-            res.status(400).json({ status: 'failed', message: 'user exists, email or username taken' });
+            res.status(400).json({ status: 'failed', message: 'user exists, email taken' });
             return;
         }
+
+        const usernameTaken = await mysqldb.get(User, { username });
+        
+        if (usernameTaken) {
+            res.status(400).json({ status: 'failed', message: 'username taken' });
+            return;
+        }
+    
         try {
             const salt = await bcrypt.genSalt(10)
             password = await bcrypt.hash(password, salt)

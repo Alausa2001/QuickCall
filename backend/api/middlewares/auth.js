@@ -15,7 +15,7 @@ async function authorization(req, res, next) {
       const decoded = jwt.verify(token, process.env.SECRET_KEY);
       email = decoded.email;
       if (!email) {
-        res.status(401).json({ status: 'unathorized', message: 'user not verified' });
+        res.status(401).json({ status: 'unathorized', message: 'user not authorized' });
         return;
       }
     } catch(err) {
@@ -31,14 +31,14 @@ async function authorization(req, res, next) {
       if (user) {
         next();
       } else {
-        res.status(401).json({ status: 'unathorized', message: 'user not verified' });
+        res.status(401).json({ status: 'unathorized', message: 'user not authorized' });
       }
     } catch(err) {
       console.log(err);
       res.status(500).json({ status: 'internal server error', message: 'error occurred during user verification' });
     }
   } else {
-    res.status(401).json({ status: 'unathorized', message: 'user not verified' });
+    res.status(401).json({ status: 'unathorized', message: 'user not authorized' });
   }
 }
 

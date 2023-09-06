@@ -14,7 +14,7 @@ def signup():
     #print(dumps(res.json(), indent=4))
 
 def signin():
-    data = {'username': 'abdul', 'password': 'abdul'}
+    data = {'username': 'abdul1', 'password': 'abdul1'}
     header = {'Content-Type': 'application/json'}
     res = requests.post('http://localhost:4000/api/v1/auth/signin', headers=header, json=data)
     print(res.headers.get('Authorization'))
@@ -47,7 +47,22 @@ def medical(token):
     res = requests.patch('http://localhost:4000/api/v1/profile/medical_information/update', headers=header, json=data)
     print(res)
     print(dumps(res.json(), indent=4))
+
+def update_profile(token):
+    print('\n Update user profile\n')
+    data = {
+        'password': 'abdul1', 'username': 'abdul1'
+    }
+    header = {'Content-Type': 'application/json', 'authorization': token}
+    res = requests.patch('http://localhost:4000/api/v1/profile/basic_information/update', headers=header, json=data)
+    print(dumps(res.json(), indent=4))
+
+    res = requests.get('http://localhost:4000/api/v1/profile/basic_information', headers=header)
+    print(dumps(res.json(), indent=4))
+
+
 if __name__ == "__main__":
     signup()
     token = signin()
-    medical(token)
+    #medical(token)
+    update_profile(token)

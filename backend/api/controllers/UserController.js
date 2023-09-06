@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const { mysqldb } = require('../../models/engine/mysql');
 const { User, MedicalInfo} = require('../../models/associations');
 const validate = require('../utils/validate_phoneno')
@@ -27,11 +28,15 @@ class UserController {
                 chronicConditions, medEmerContact, famDocContact,
             };
             const medProfile = await mysqldb.createModel(MedicalInfo, obj);
-            res.status(201).json({ status: 'success', message: "medical profile created", medInfo: medProfile });
+            res.status(201).json({
+                status: 'success', message: "medical profile created", medInfo: medProfile
+            });
             return;
         } catch(err) {
             console.log(err);
-            res.status(500).json({ status: 'internal server error', message: 'An error occurred while creating medical profile'});
+            res.status(500).json({
+                status: 'internal server error', message: 'An error occurred while creating medical profile'
+            });
             return;
         }
     }
@@ -42,10 +47,12 @@ class UserController {
         try {
             const user = await mysqldb.get(User, { email }, ['userId'])
             const medInfo = await mysqldb.get(MedicalInfo, { userId: user.userId});
-            res.status(201).json({ status: 'success', medicalInformaton: medInfo });
+            res.status(200).json({ status: 'success', medicalInformaton: medInfo });
         } catch(err) {
             console.log(err);
-            res.status(500).json({ status: 'internal server error', message: 'An error occurred while retreiving your information'});
+            res.status(500).json({
+                status: 'internal server error', message: 'An error occurred while retreiving your information'
+            });
             return;
         }
     }
@@ -89,8 +96,54 @@ class UserController {
             return;
           } catch(err) {
             console.log(err);
-            res.status(500).json({status: "internal server error", message: "error occurred while updatting profile"}); 
+            res.status(500).json({
+                status: "internal server error", message: "error occurred while updatting profile"
+            }); 
           }
+    }
+
+    static async userInfo(req, res) {
+        const email = res.locals.email;
+
+        try {
+            const user = await mysqldb.get(User, { email });
+            delete user.password;
+            res.status(200).json({ status: 'success', userInformation: user });
+        } catch(err) {
+            console.log(err);
+            res.status(500).json({
+                status: 'internal server error', message: 'An error occurred while retreiving your information'
+            });
+            return;
+        }   
+    }
+    static async updateProfile(req, res) {
+        const email = res.locals.email;
+        const obj = req.body;
+        
+        if (obj.password) {
+            const salt = await bcrypt.genSalt(10)
+            obj.password = await bcrypt.hash(obj.password, salt)
+        }
+        
+        const keys = Object.keys(obj);
+        for (let key of keys) {
+            if (!(obj[key])) delete obj[key];
+        }
+        try {
+            const updated = await mysqldb.update(User, { email }, obj)
+            if (updated[0] > 0) {
+                res.status(200).json({ status: "success", message: "profile updated successfully" });
+                return;
+            }
+            res.status(404).json({status: "Not found", message: "profile not updated"});
+            return;
+        } catch(err) {
+            console.error(err);
+            res.status(500).json({
+                status: "Internal server error", message: "error occurred while updating profile"
+            }); 
+        }
     }
 }
 
