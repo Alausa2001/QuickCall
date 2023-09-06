@@ -1,4 +1,5 @@
 /* I will remove the smtp credentials */
+// Not working yet
 require('dotenv').config();
 const nodemailer = require('nodemailer');
 
