@@ -15,6 +15,10 @@ app.use(cors());
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/profile', userRouter);
 
+app.get('/', (req, res) => {
+    res.status(200).json("Welcome to QuickCall Emergency");
+});
+
 app.listen(process.env.PORT, () => {
   console.log(`server is running on port ${process.env.PORT}`);
 });
