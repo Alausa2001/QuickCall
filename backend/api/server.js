@@ -15,7 +15,7 @@ app.use(cors());
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/profile', userRouter);
 
-app.get('/', (req, res) => {
+app.get('/api/v1', (req, res) => {
     res.status(200).json("Welcome to QuickCall Emergency");
 });
 
