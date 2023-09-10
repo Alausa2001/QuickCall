@@ -1,0 +1,32 @@
+{
+  "name": "quickcall",
+  "version": "1.0.0",
+  "description": "This app can be a valuable tool for people who are looking for quick and easy access to emergency assistance. It can also help people to stay safe in an emergency situation. We are building this app for an hackathon.",
+  "main": "api/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start-server": "nodemon ./backend/api/server.js",
+    "dev": "nodemon ./backend/api/server.js"
+  },
+  "author": "Alausa Abdulqoyum, Aishah Boladale, I am coming to put your name",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.48.0"
+  },
+  "dependencies": {
+    "@elasticemail/elasticemail-client": "^4.0.23",
+    "@googlemaps/google-maps-services-js": "^3.3.37",
+    "axios": "^1.5.0",
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.6.0",
+    "nodemailer": "^6.9.4",
+    "nodemon": "^3.0.1",
+    "opencage-api-client": "^1.0.2",
+    "sequelize": "^6.32.1",
+    "uuid": "^9.0.0"
+  }
+}
