@@ -18,6 +18,16 @@ Documetation of the API endpoints for CargoLink
 #### POST method:  /signup
 ---
 
+| Parameters | Required | No of characters| DataType|
+| ---- | --- | --- | ---|
+| firstName  | yes |  max 35| string |
+| lastName  | yes | max 35 | string |
+| password  | yes | between 8 - 15 characters| string |
+| email | yes | max 100 characters | string |
+| username| yes | max 36 characters | string |
+| phoneNo1 | yes | max 14 characters | string |
+| phoneNo2 | optional | max 14 characters | string |
+
 ##### Request
 ```
 Method: POST
@@ -53,3 +63,11 @@ Body:   {
     }
 }
 ```
+
+
+
+
+
+
+
+
