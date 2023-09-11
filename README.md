@@ -200,7 +200,7 @@ Body:   {}
         "chronicConditions": [
             "asthma"
         ],
-        "medEmerContact": "0200000",
+         "medEmerContact": [ "0200000" ],
         "famDocContact": "020200000",
         "createdAt": "2023-09-11T15:59:42.000Z",
         "updatedAt": "2023-09-11T15:59:42.000Z",
