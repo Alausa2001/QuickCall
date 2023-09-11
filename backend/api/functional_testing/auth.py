@@ -14,7 +14,7 @@ def signup():
     print(dumps(res.json(), indent=4))
 
 def signin():
-    data = {'username': 'abdul1', 'password': 'abdul1'}
+    data = {'username': 'abdul', 'password': 'abdul'}
     header = {'Content-Type': 'application/json'}
     res = requests.post('http://localhost:4000/api/v1/auth/signin', headers=header, json=data)
     print(res.headers.get('Authorization'))

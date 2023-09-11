@@ -5,13 +5,13 @@ from sys import argv
 
 def signup():
     data = {
-        'firstName': 'abdul', 'lastName': 'abdul', 'username': 'abdul', 'phoneNo1': '02020000',
+        'firstName': 'abdul', 'lastName': 'abdul', 'username': 'abdul', 'phoneNo1': '08160969769',
         'email': 'oluwaferanmialausa2001@gmail.com', 'password': 'abdul',
     }
     header = {'Content-Type': 'application/json'}
     res = requests.post('http://localhost:4000/api/v1/auth/signup', headers=header, json=data)
     print(res)
-    #print(dumps(res.json(), indent=4))
+    print(dumps(res.json(), indent=4))
 
 def signin():
     data = {'username': 'abdul1', 'password': 'abdul1'}
@@ -24,16 +24,16 @@ def signin():
 
 def medical(token):
     data = {
-        'bloodType': 'A+', 'genotype': 'AS', 'famDocContact': '020200000', 'medEmerContact': '0200000',
-        'allergies': ['dust']
+        'bloodType': 'A+', 'genotype': 'AS', 'famDocContact': '020200000', 'medEmerContact': ['0200000'],
+        'allergies': ['dust'], 'chronicConditions': ['asthma']
     }
     header = {'Content-Type': 'application/json', 'authorization': token}
 
-    """
+    
     res = requests.post('http://localhost:4000/api/v1/profile/medical_information/submit', headers=header, json=data)
     print(res)
     print(dumps(res.json(), indent=4))
-    """
+  
 
     print('\nGet user Medical information\n')
     res = requests.get('http://localhost:4000/api/v1/profile/medical_information', headers=header)
@@ -42,8 +42,8 @@ def medical(token):
 
     print('\n Update user Medical information\n')
     data = {
-        'allergies': ['dust', 'pollen'], "chronicConditions": ["diabetes", "hypertension"]
-    }
+            'allergies': ['dust', 'pollen'], "chronicConditions": ["diabetes", "hypertension"], 'medEmerContact': ['0200']
+            }
     res = requests.patch('http://localhost:4000/api/v1/profile/medical_information/update', headers=header, json=data)
     print(res)
     print(dumps(res.json(), indent=4))
@@ -64,5 +64,5 @@ def update_profile(token):
 if __name__ == "__main__":
     signup()
     token = signin()
-    #medical(token)
+    medical(token)
     update_profile(token)
