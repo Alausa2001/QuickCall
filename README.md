@@ -1,7 +1,6 @@
 # QuickCall
 This app can be a valuable tool for people who are looking for quick and easy access to emergency assistance. It can also help people to stay safe in an emergency situation. We are building this app for an hackathon
 
-
 # API DOCUMENTATION
 Documetation of the API endpoints for CargoLink
 
@@ -109,6 +108,22 @@ Body:   { username: 'abdul', password: 'abdul1234' }
 #### POST method:  /profile/medical_information/submit
 ---
 
+##### Parameters: 
+| fields | Required | No of characters| DataType|
+| ---- | --- | --- | ---|
+| bloodType  | yes |  max 4 | string |
+| genotype  | yes | max 4 | string |
+| famDocContact  | optional | max 14 characters| string |
+| medEmerContact | optional | - | array |
+| allergies| optional | - | array |
+| chronicConditions | optional | - | array |
+
+Note: 
+
+famDocContact = users' family doctor's contact
+
+medEmerContact = contact of persons that can make medical decisions on users' behalf
+
 
 ##### Request
 
@@ -123,7 +138,7 @@ Body:   {
   bloodType: 'A+',
   genotype: 'AS',
   famDocContact: '020200000',
-  medEmerContact: '0200000',
+  "medEmerContact": [ "0200000" ],
   allergies: [ 'dust' ],
   chronicConditions: [ 'asthma' ]
 }
@@ -146,7 +161,7 @@ Body:   {
         "chronicConditions": [
             "asthma"
         ],
-        "medEmerContact": "0200000",
+        "medEmerContact": [ "0200000" ],
         "famDocContact": "020200000",
         "updatedAt": "2023-09-11T16:03:25.553Z",
         "createdAt": "2023-09-11T16:03:25.553Z"
