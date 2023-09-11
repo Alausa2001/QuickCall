@@ -2,11 +2,8 @@ const axios = require('axios');
 
 
 
-async function geocode(address) {
-    const key = 'c77cc595d8594c778caeb34876f72b50'; 
-    const url =  `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(
-        address + ', Nigeria'
-      )}&key=${key}`;
+async function geocode(lat, lng) {
+    const url =  `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lng}&key=${process.env.OPENCAGE_KEY}`;
 
     const options = {
         method: 'GET',
@@ -19,11 +16,11 @@ async function geocode(address) {
         const locationDetails = { 
             country: '', state: '', LGA: '', town: '' 
         }
+
         if (data.results.length > 0) {
             const result = data.results[0];
             const components = result.components;
     
-            console.log(components)
             
                 const state = components['state'];
                 locationDetails.state = state;
@@ -46,15 +43,19 @@ async function geocode(address) {
         locationDetails.status = 'success';
         return locationDetails;
     } catch(err) {
-        throw new Error(err.message)
+        console.log(err);
+        throw new Error(err.message);
     }
 }
 
+/*
 (async () => {
     try {
-    const response = await geocode('iwo road');
+    const response = await geocode(6.9032507,  3.8356233);
     console.log(response)
     } catch(err) {
         console.log(err.message);
     }
 })();
+*/
+module.exports = geocode;

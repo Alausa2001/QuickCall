@@ -27,7 +27,7 @@ MedicalInfo.init({
         allowNull: true,
     },
     medEmerContact: {
-        type: DataTypes.STRING(15), 
+        type: DataTypes.JSON, 
         allowNull: true,
     },
     famDocContact: {
