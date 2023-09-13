@@ -70,6 +70,34 @@ def delete_contact():
     res = requests.delete('http://localhost:4000/api/v1/admin/emergency_contact/b9681e17-197f-470a-86fc-76b9bf026355/delete', headers=header)
     print(dumps(res.json(), indent=4))
 
+def post_notable():
+    print('\n postt of contacts of LGAs\n')
+    data = {
+        "position": 'Chief Medical Director, John Hopkins', "personName": 'Khidr Rodiyah',
+        "whatsappContact": "091xxxxxxx", "phoneNo": '091111111'
+    }
+    header = {'Content-Type': 'application/json'}
+    res = requests.post('http://localhost:4000/api/v1/admin/add_notable_personality/b329e011-f439-404a-aee0-7c3236b88239', json=data, headers=header)
+    print(dumps(res.json(), indent=4))
+
+
+def get_notable():
+    print('\n List of personalities of LGAs\n')
+
+    header = {'Content-Type': 'application/json'}
+    res = requests.get('http://localhost:4000/api/v1/admin/notable_people/b329e011-f439-404a-aee0-7c3236b88239', headers=header)
+    print(dumps(res.json(), indent=4))
+
+
+def delete_notable():
+    print('\n Delete of personality\n')
+
+    header = {'Content-Type': 'application/json'}
+    res = requests.delete('http://localhost:4000/api/v1/admin/notable_people/b0f096ef-ae92-40cc-b093-45ed1658d9f8/delete', headers=header)
+    print(dumps(res.json(), indent=4))
+
+
+
 if __name__ == "__main__":
     #post_states()
     #get_states()
@@ -77,5 +105,9 @@ if __name__ == "__main__":
     #get_lgas()
     #delete_lgas()
     #post_contacts()
-    delete_contact()
-    get_contacts()
+    #delete_contact()
+    #get_contacts()
+    #post_notable()
+    get_notable()
+    delete_notable()
+    get_notable()

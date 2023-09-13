@@ -15,7 +15,7 @@ EmergencyContacts.init({
         type: DataTypes.STRING(50),
         allowNull: false,
     },
-    phoneNo: {
+    emergencyNo: {
         type: DataTypes.STRING(15), // Adjust the length as needed
         allowNull: true,
     },

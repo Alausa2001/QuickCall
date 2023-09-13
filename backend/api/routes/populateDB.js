@@ -17,4 +17,8 @@ populateDB.post('/add_emergency_contacts/:LGAId', logger, PopulateDBController.a
 populateDB.get('/emergency_contacts/:LGAId', logger, PopulateDBController.getContacts);
 populateDB.delete('/emergency_contact/:contactId/delete', logger, PopulateDBController.deleteEmergencyContact)
 
+populateDB.post('/add_notable_personality/:LGAId', logger, PopulateDBController.addNotablePersonality);
+populateDB.get('/notable_people/:LGAId', logger, PopulateDBController.getNotablePersonalities);
+populateDB.delete('/notable_people/:notableId/delete', logger, PopulateDBController.deleteNotablePersonality)
+
 module.exports = populateDB;

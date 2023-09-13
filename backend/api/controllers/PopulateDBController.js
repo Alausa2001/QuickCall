@@ -156,7 +156,7 @@ class PopulateDBController {
 
         if (!emergencyType) {
             res.status(400).json({
-                status: 'bad status',
+                status: 'bad request',
                 message: 'Type of emergency contact not specified (fire, medical or police)'
             });
             return;
@@ -164,7 +164,7 @@ class PopulateDBController {
 
         if (!emergencyNo) {
             res.status(400).json({
-                status: 'bad status',
+                status: 'bad request',
                 message: 'Emergency number not defined'
             });
             return;
@@ -228,6 +228,90 @@ class PopulateDBController {
             console.log(err);
             res.status(500).json({
                 status: 'internal server error', message: "error occurred while deleting local governments"
+        });
+        return;
+        }
+    }
+
+
+    static async addNotablePersonality(req, res) {
+        const { position, personName, phoneNo, whatsappContact } = req.body;
+        const LGAId = req.params.LGAId;
+
+        if (!personName) {
+            res.status(400).json({ status: "bad request", message: "Person's name not defined" });
+            return;
+        }
+
+        if (!position) {
+            res.status(400).json({
+                status: 'bad  request', message: 'Position held by person not defined'});
+            return;
+        }
+
+        if (!phoneNo) {
+            res.status(400).json({ status: "bad request", message: "Person's contact not defined" });
+            return;
+        }
+
+        try {
+            const obj = {
+                position, personName, phoneNo, whatsappContact, LGAId,
+            };
+
+            const contact = await mysqldb.createModel(NotablePeople, obj);
+            res.status(201).json({
+                status: 'success', message: `${personName}'s details added successfully`
+            });
+            return;
+        } catch(err) {
+            console.log(err);
+            res.status(500).json({
+                status: 'internal server error',
+                message: `error occurred while adding ${personName}'s  details`
+            });
+            return;
+        }
+    }
+
+    static async getNotablePersonalities(req, res) {
+        /* returns all notable personalities in a local government */
+        const LGAId = req.params.LGAId;
+
+        try {
+            const notablePeople = await mysqldb.getAll(NotablePeople, { LGAId });
+            if (!notablePeople) {
+                res.status(404).json({ status: "not found", message: 'No personalities found' });
+            }
+            res.status(200).json({ status: "success", notablePeople });
+            return;
+        } catch(err) {
+            res.status(500).json({
+                status: 'internal server error',
+                message: 'error occurred while retrieving notable personalities details'
+            });
+            return
+        }
+    }
+
+    static async deleteNotablePersonality(req, res) {
+        const { notableId } = req.params;
+        
+        try {
+            const deleted = await NotablePeople.destroy({ where: { notableId }});
+            if (deleted > 0) {
+                res.status(200).json({ status: "success", message: "deleted!" });
+                return;
+            }
+            res.status(404).json({
+                status: 'not found', message: 'person not found'
+            });
+            return;
+
+        } catch(err) {
+            console.log(err);
+            res.status(500).json({
+                status: 'internal server error', message: "error occurred while deleting personality"
         });
         return;
         }
