@@ -7,7 +7,7 @@ from sys import argv
 def post_states():
     
     data = {
-        "stateName": [ 'Ogun', 'lAgos', 'AnAmbrA']
+        "states": [ 'Ogun', 'lAgos', 'AnAmbrA']
     }
     header = {'Content-Type': 'application/json'}
     res = requests.post('http://localhost:4000/api/v1/admin/add_states', json=data, headers=header)
@@ -21,4 +21,5 @@ def get_states():
     print(dumps(res.json(), indent=4))
 
 if __name__ == "__main__":
+    post_states()
     get_states()

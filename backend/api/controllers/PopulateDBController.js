@@ -13,15 +13,22 @@ class PopulateDBController {
 
         let statesDetails = [];
         try {
+            let statesPresent = await State.findAll({ raw: true, attributes: ["stateName"]});
+            statesPresent = statesPresent.map((state) => state.stateName);
+            
             for (let state of states) { 
+                if (statesPresent.includes(state.toLowerCase())) {
+                    continue;
+                }
                 const stateDetails = await mysqldb.createModel(State, { stateName: state.toLowerCase() });
                 delete stateDetails.createdAt;
                 delete stateDetails.updatedAt;
                 statesDetails.push(stateDetails);
             }
-            res.status(201).json({ status: "success", message: "State added successfully", statesDetails });
+            res.status(201).json({ status: "success", message: "States added successfully", statesDetails });
             return;
         } catch(err) {
+            console.log(err)
             res.status(500).json({
                 status: "Internal server error", message: "Error occurred while adding the state"
             });
