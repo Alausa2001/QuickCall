@@ -148,6 +148,90 @@ class PopulateDBController {
         return;
         }
     }
+
+    static async addEmergencyContacts(req, res) {
+
+        const { emergencyType, emergencyNo, whatsappContact } = req.body;
+        const LGAId = req.params.LGAId;
+
+        if (!emergencyType) {
+            res.status(400).json({
+                status: 'bad status',
+                message: 'Type of emergency contact not specified (fire, medical or police)'
+            });
+            return;
+        }
+
+        if (!emergencyNo) {
+            res.status(400).json({
+                status: 'bad status',
+                message: 'Emergency number not defined'
+            });
+            return;
+        }
+
+        try {
+            const obj = {
+                LGAId, emergencyNo, emergencyType, whatsappContact
+            };
+            const contact = await mysqldb.createModel(EmergencyContacts, obj);
+            res.status(201).json({
+                status: 'success', message: 'emergency contact details added successfully', contact
+            });
+            return;
+        } catch(err) {
+            console.log(err);
+            res.status(500).json({
+                status: 'internal server error',
+                message: 'error occurred while adding emergency contact details'
+            });
+            return;
+        }
+    }
+
+    static async getContacts(req, res) {
+        /* returns all emergency contacts in a local government */
+        const LGAId = req.params.LGAId;
+
+        try {
+            const contacts = await mysqldb.getAll(EmergencyContacts, { LGAId });
+            if (!contacts) {
+                res.status(404).json({ status: "not found", message: 'No contacts found' });
+            }
+            res.status(200).json({ status: "success", contacts });
+            return;
+        } catch(err) {
+            res.status(500).json({
+                status: 'internal server error',
+                message: 'error occurred while retrieving emergency contact details'
+            });
+            return
+        }
+    }
+
+    static async deleteEmergencyContact(req, res) {
+        const { contactId } = req.params;
+        
+        try {
+            const deleted = await EmergencyContacts.destroy({ where: { contactId }});
+            console.log(deleted)
+            if (deleted > 0) {
+                res.status(200).json({ status: "success", message: "contact deleted!" });
+                return;
+            }
+            res.status(404).json({
+                status: 'not found', message: 'contact not found'
+            });
+            return;
+
+        } catch(err) {
+            console.log(err);
+            res.status(500).json({
+                status: 'internal server error', message: "error occurred while deleting local governments"
+        });
+        return;
+        }
+    }
 }
 
 

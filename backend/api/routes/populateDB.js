@@ -13,4 +13,8 @@ populateDB.post('/add_local_governments', logger, PopulateDBController.addLGA);
 populateDB.get('/get_local_governments/:stateId', logger, PopulateDBController.getLGAs);
 populateDB.delete('/local_government/:LGAId/delete', logger, PopulateDBController.deleteLGA);
 
+populateDB.post('/add_emergency_contacts/:LGAId', logger, PopulateDBController.addEmergencyContacts);
+populateDB.get('/emergency_contacts/:LGAId', logger, PopulateDBController.getContacts);
+populateDB.delete('/emergency_contact/:contactId/delete', logger, PopulateDBController.deleteEmergencyContact)
+
 module.exports = populateDB;
