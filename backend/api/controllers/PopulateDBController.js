@@ -107,7 +107,7 @@ class PopulateDBController {
     }
 
     static async getLGAs(req, res) {
-        
+
         const stateId = req.params.stateId;
         try {
             const LGAs = await LGA.findAll({ where: { stateId }});
@@ -123,6 +123,29 @@ class PopulateDBController {
                 message: "Error occurred while retrieving the local governments areas details"
             });
             return;
+        }
+    }
+
+    static async deleteLGA(req, res) {
+        const { LGAId } = req.params;
+        try {
+            const LGAExist = await mysqldb.get(LGA, { LGAId });
+            if (!LGAExist) {
+                res.status(404).json({ status: "not found", message: 'Local goverment not found' });
+                return;
+            }
+
+            const state = await mysqldb.get(State, { stateId: LGAExist.stateId }, ["stateName"])
+            const deleted = await LGA.destroy({ where: { LGAId }});
+            res.status(200).json({
+                status: "success", message: `Deleted ${LGAExist.LGAName} local government in ${state.stateName}`
+            });
+        } catch(err) {
+            console.log(err);
+            res.status(500).json({
+                status: 'internal server error', message: "error occurred while deleting local governments"
+        });
+        return;
         }
     }
 }

@@ -38,9 +38,16 @@ def get_lgas():
     res = requests.get('http://localhost:4000/api/v1/admin/get_local_governments/75025376-33d6-4c36-a704-305103e9aa62', headers=header)
     print(dumps(res.json(), indent=4))
 
+def delete_lgas():
+    print('\n Delete of LGAs\n')
+
+    header = {'Content-Type': 'application/json'}
+    res = requests.delete('http://localhost:4000/api/v1/admin/local_government/8055104e-f43f-4472-9655-1949f50cbc56/delete', headers=header)
+    print(dumps(res.json(), indent=4))
 
 if __name__ == "__main__":
     #post_states()
     #get_states()
-    post_lgas()
+    #post_lgas()
     get_lgas()
+    delete_lgas()
