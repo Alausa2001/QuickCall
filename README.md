@@ -462,6 +462,215 @@ Body:   {}
 }
 ```
 
+---
+DELETE method: /admin/local_government/LGAId
+---
+
+##### Request
+
+```
+Method: DELETE
+Path:   /api/v1/admin/local_government/3834f40d-198c-4295-b5f4-079aadc96e73/delete
+Headers:   { Authorization: undefined, 'Content-Type': 'application/json' }
+Body:   {}
+```
+
+##### Response
+
+```
+{
+    "status": "success",
+    "message": "Deleted abeokuta local government in ogun"
+}
+```
+
+---
+POST method: /admin/add_emergency_contacts/LGAId = adds an emergency contact details under a local government
+---
+
+##### Request
+
+```
+Method: POST
+Path:   /api/v1/admin/add_emergency_contacts/d6eef2e1-b588-413d-8c0d-b59ebae36ee3
+Headers:   { Authorization: undefined, 'Content-Type': 'application/json' }
+Body:   {
+  emergencyType: 'Medical',
+  emergencyNo: '12345566',
+  whatsappContact: '11111'
+}
+```
+
+##### Response
+
+```
+{
+    "status": "success",
+    "message": "emergency contact details added successfully",
+    "contact": {
+        "contactId": "35cc4899-f3db-4a8f-9868-c2ea42502aac",
+        "LGAId": "d6eef2e1-b588-413d-8c0d-b59ebae36ee3",
+        "emergencyNo": "12345566",
+        "emergencyType": "Medical",
+        "whatsappContact": "11111",
+        "updatedAt": "2023-09-14T14:23:40.743Z",
+        "createdAt": "2023-09-14T14:23:40.743Z"
+    }
+}
+```
+
+---
+GET method: /admin/emergency_contacts/LGAId - list all emergency contacts under a local governments
+---
+
+##### Request
+
+```
+Method: GET
+Path:   /api/v1/admin/emergency_contacts/d6eef2e1-b588-413d-8c0d-b59ebae36ee3
+Headers:   { Authorization: undefined, 'Content-Type': 'application/json' }
+Body:   {}
+```
+
+##### Response
+
+```
+{
+    "status": "success",
+    "contacts": [
+        {
+            "contactId": "35cc4899-f3db-4a8f-9868-c2ea42502aac",
+            "emergencyType": "Medical",
+            "emergencyNo": "12345566",
+            "whatsappContact": "11111",
+            "createdAt": "2023-09-14T14:23:40.000Z",
+            "updatedAt": "2023-09-14T14:23:40.000Z",
+            "LGAId": "d6eef2e1-b588-413d-8c0d-b59ebae36ee3"
+        }
+    ]
+}
+```
+
+---
+DELETE method: /admin/emergency_contact/contactId
+---
+
+
+##### Request
+
+```
+Method: DELETE
+Path:   /api/v1/admin/emergency_contact/35cc4899-f3db-4a8f-9868-c2ea42502aac/delete
+Headers:   { Authorization: undefined, 'Content-Type': 'application/json' }
+Body:   {}
+```
+
+
+##### Response
+
+```
+{
+    "status": "success",
+    "message": "contact deleted!"
+}
+```
+
+
+---
+POST method: /admin/add_notable_personality/LGAId - adds a notable personality under a local governmnet
+---
+
+##### Request
+
+```
+Method: POST
+Path:   /api/v1/admin/add_notable_personality/d6eef2e1-b588-413d-8c0d-b59ebae36ee3
+Headers:   { Authorization: undefined, 'Content-Type': 'application/json' }
+Body:   {
+  position: 'Chief Medical Director, John Hopkins',
+  personName: 'Khidr Rodiyah',
+  whatsappContact: '091xxxxxxx',
+  phoneNo: '091111111'
+}
+```
+
+##### Response
+
+```
+{
+    "status": "success",
+    "message": "Khidr Rodiyah's details added successfully"
+}
+```
+
+
+---
+GET method: /admin/notable_people/LGAId
+---
+
+##### Request
+
+```
+Method: GET
+Path:   /api/v1/admin/notable_people/d6eef2e1-b588-413d-8c0d-b59ebae36ee3
+Headers:   { Authorization: undefined, 'Content-Type': 'application/json' }
+Body:   {}
+```
+
+
+##### Response
+
+```
+{
+    "status": "success",
+    "notablePeople": [
+        {
+            "notableId": "5e5ebc88-885f-4878-ac91-dd6a30a34d07",
+            "position": "Chief Medical Director, John Hopkins",
+            "personName": "Khidr Rodiyah",
+            "phoneNo": "091111111",
+            "whatsappContact": "091xxxxxxx",
+            "createdAt": "2023-09-14T14:49:01.000Z",
+            "updatedAt": "2023-09-14T14:49:01.000Z",
+            "LGAId": "d6eef2e1-b588-413d-8c0d-b59ebae36ee3"
+        }
+    ]
+}
+```
+
+
+---
+DELETE method: /admin/notable_people/notableId
+---
+
+
+##### Request
+
+```
+Method: DELETE
+Path:   /api/v1/admin/notable_people/5e5ebc88-885f-4878-ac91-dd6a30a34d07/delete
+Headers:   { Authorization: undefined, 'Content-Type': 'application/json' }
+Body:   {}
+```
+
+##### Response
+
+```
+{
+    "status": "success",
+    "message": "deleted!"
+}
+```
+
+
+
+
+
+
+
+
+
+
 
 
 
