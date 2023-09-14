@@ -424,7 +424,7 @@ Body:   {
 ```
 
 ---
-GET method: /':stateId'/get_local_governments
+GET method: /:stateId/get_local_governments
 ---
 
 
