@@ -300,3 +300,189 @@ Body:   {}
     }
 }
 ```
+
+
+## Routes to populate database
+
+---
+POST method: /admin/add_states = To add new states into the database
+---
+
+##### Request curl
+
+```
+Method: POST
+Path:   /api/v1/admin/add_states
+Headers:   { Authorization: undefined, 'Content-Type': 'application/json' }
+Body:   { states: [ 'Ogun', 'lAgos', 'AnAmbrA' ] }
+---
+```
+
+##### Response
+
+```
+{
+    "status": "success",
+    "message": "States added successfully",
+    "statesDetails": [
+        {
+            "stateId": "ae6b4ac5-e75f-4b7b-814a-8fa7523fe7ab",
+            "stateName": "ogun"
+        },
+        {
+            "stateId": "7da09677-325b-4299-a8f3-2f0f0373e8b3",
+            "stateName": "lagos"
+        },
+        {
+            "stateId": "0d66fd4d-43e0-4d7f-8d5e-7a149a60e550",
+            "stateName": "anambra"
+        }
+    ]
+}
+```
+
+
+---
+GET method: /admin/get_states: Returns a list of all states and their IDs
+---
+
+##### Request
+
+
+```
+Method: GET
+Path:   /api/v1/admin/get_states
+Headers:   { Authorization: undefined, 'Content-Type': 'application/json' }
+Body:   {}
+```
+
+##### Response
+
+```
+{
+    "status": "success",
+    "states": [
+        {
+            "stateId": "0d66fd4d-43e0-4d7f-8d5e-7a149a60e550",
+            "stateName": "anambra",
+            "createdAt": "2023-09-14T13:21:39.000Z",
+            "updatedAt": "2023-09-14T13:21:39.000Z"
+        },
+        {
+            "stateId": "7da09677-325b-4299-a8f3-2f0f0373e8b3",
+            "stateName": "lagos",
+            "createdAt": "2023-09-14T13:21:39.000Z",
+            "updatedAt": "2023-09-14T13:21:39.000Z"
+        },
+        {
+            "stateId": "ae6b4ac5-e75f-4b7b-814a-8fa7523fe7ab",
+            "stateName": "ogun",
+            "createdAt": "2023-09-14T13:21:39.000Z",
+            "updatedAt": "2023-09-14T13:21:39.000Z"
+        }
+    ]
+}
+
+```
+
+
+---
+POST method: /admin/add_local_governments = Adds local governments to a state
+---
+
+##### Request 
+
+```
+Method: POST
+Path:   /api/v1/admin/add_local_governments
+Headers:   { Authorization: undefined, 'Content-Type': 'application/json' }
+Body:   {
+  LGAs: [ 'Ijebu North', 'Abeokuta' ],
+  stateId: 'ae6b4ac5-e75f-4b7b-814a-8fa7523fe7ab'
+}
+```
+
+##### Response
+
+```
+{
+    "status": "success",
+    "message": "local government areas added successfully",
+    "LGAsDetails": [
+        {
+            "LGAId": "d6eef2e1-b588-413d-8c0d-b59ebae36ee3",
+            "LGAName": "ijebu north",
+            "stateId": "ae6b4ac5-e75f-4b7b-814a-8fa7523fe7ab"
+        },
+        {
+            "LGAId": "3834f40d-198c-4295-b5f4-079aadc96e73",
+            "LGAName": "abeokuta",
+            "stateId": "ae6b4ac5-e75f-4b7b-814a-8fa7523fe7ab"
+        }
+    ]
+}
+```
+
+---
+GET method: /':stateId'/get_local_governments
+---
+
+
+##### Request
+
+
+```
+Method: GET
+Path:   /api/v1/admin/ae6b4ac5-e75f-4b7b-814a-8fa7523fe7ab/get_local_governments
+Headers:   { Authorization: undefined, 'Content-Type': 'application/json' }
+Body:   {}
+```
+
+##### Response
+
+```
+{
+    "status": "success",
+    "LGAs": [
+        {
+            "LGAId": "3834f40d-198c-4295-b5f4-079aadc96e73",
+            "LGAName": "abeokuta",
+            "createdAt": "2023-09-14T13:49:48.000Z",
+            "updatedAt": "2023-09-14T13:49:48.000Z",
+            "stateId": "ae6b4ac5-e75f-4b7b-814a-8fa7523fe7ab"
+        },
+        {
+            "LGAId": "d6eef2e1-b588-413d-8c0d-b59ebae36ee3",
+            "LGAName": "ijebu north",
+            "createdAt": "2023-09-14T13:49:48.000Z",
+            "updatedAt": "2023-09-14T13:49:48.000Z",
+            "stateId": "ae6b4ac5-e75f-4b7b-814a-8fa7523fe7ab"
+        }
+    ]
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
