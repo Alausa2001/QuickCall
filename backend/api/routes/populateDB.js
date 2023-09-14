@@ -10,7 +10,7 @@ populateDB.post('/add_states', logger, PopulateDBController.addStates);
 populateDB.get('/get_states', logger, PopulateDBController.getStates);
 
 populateDB.post('/add_local_governments', logger, PopulateDBController.addLGA);
-populateDB.get('/get_local_governments/:stateId', logger, PopulateDBController.getLGAs);
+populateDB.get('/:stateId/get_local_governments', logger, PopulateDBController.getLGAs);
 populateDB.delete('/local_government/:LGAId/delete', logger, PopulateDBController.deleteLGA);
 
 populateDB.post('/add_emergency_contacts/:LGAId', logger, PopulateDBController.addEmergencyContacts);
