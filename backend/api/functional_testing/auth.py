@@ -14,7 +14,7 @@ def signup():
     print(dumps(res.json(), indent=4))
 
 def signin():
-    data = {'username': 'abdul', 'password': 'abdul'}
+    data = {'username': 'abdul1', 'password': 'abdul1'}
     header = {'Content-Type': 'application/json'}
     res = requests.post('http://localhost:4000/api/v1/auth/signin', headers=header, json=data)
     print(res.headers.get('Authorization'))
@@ -22,6 +22,14 @@ def signin():
     print(dumps(res.json(), indent=4))
     return res.headers.get('Authorization')
 
+def contact(token):
+    
+    header = {'Content-Type': 'application/json', "authorization": token}
+    res = requests.get('http://localhost:4000/api/v1/emergency/6.9234/3.8364/Medical', headers=header)
+    print(dumps(res.json(), indent=4))
+
+
 if __name__ == "__main__":
     signup()
     token = signin()
+    contact(token)
