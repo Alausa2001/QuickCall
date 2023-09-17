@@ -10,11 +10,11 @@ async function authorization(req, res, next) {
   if (auth && auth.split(' ')[0] === 'Bearer') {
     const token = auth.split(' ')[1];
     
-    let email;
+    let username;
     try {
       const decoded = jwt.verify(token, process.env.SECRET_KEY);
-      email = decoded.email;
-      if (!email) {
+      username = decoded.username;
+      if (!username) {
         res.status(401).json({ status: 'unathorized', message: 'user not authorized' });
         return;
       }
@@ -24,11 +24,11 @@ async function authorization(req, res, next) {
       return;
     }
 
-    const filter = { email };
-    res.locals.email = email;
+    const filter = { username };
     try {
       const user = await mysqldb.get(User, filter);
       if (user) {
+        res.locals.username = username;
         next();
       } else {
         res.status(401).json({ status: 'unathorized', message: 'user not authorized' });

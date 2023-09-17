@@ -5,6 +5,58 @@ const { User, MedicalInfo} = require('../../models/associations');
 
 
 class UserController {
+    static async createProfile(req, res) {
+        let {
+            firstName, lastName, email, phoneNo1, phoneNo2, age, gender,
+            nameOfEmerContact,  emergencyPhoneNo, relationship,
+        } = req.body;
+        // console.log(req.body);
+        if (!firstName) {
+            res.status(400).json({ status: 'bad request', message: 'firstname missing' });
+            return;
+        }
+        if (!lastName) {
+            res.status(400).json({ status: 'bad request', message: 'lastname missing' });
+            return;
+        }
+          
+        if (!email) {
+            res.status(400).json({ status: 'bad request', message: 'email missing' });
+            return;
+        }
+        if (!phoneNo1) {
+            res.status(400).json({ status: 'bad request', message: 'main phone number missing' });
+            return;
+        }
+      
+        let data = await validatePhoneNo(phoneNo1)
+        if (data === null || (!data.carrier))  {
+            res.status(400).json({ status: 'bad request', message: 'phone number 1 invalid' });
+            return
+        }
+      
+          
+        if (phoneNo2) {
+            data = await validatePhoneNo(phoneNo2)
+            if (data === null || (!data.carrier))  {
+                res.status(400).json({ status: 'bad request', message: 'phone number 2 invalid' });
+                return
+            } 
+        } 
+        try {
+            const obj = {
+                firstName, lastName, email, phoneNo1, phoneNo2, age, gender,
+                nameOfEmerContact,  emergencyPhoneNo, relationship,
+            };
+            const newUser = await mysqldb.createModel(User, obj);
+              delete newUser.password;
+              res.status(201).json({ status: 'success', newUser });
+          } catch (err) {
+              console.log(err)
+              res.status(500).json({ error: `internal server error` });
+          }
+    }
+
     static async submitMedicalInfo(req, res) {
         const email = res.locals.email;
         const {

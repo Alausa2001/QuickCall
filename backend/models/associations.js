@@ -41,7 +41,7 @@ EmergencyContacts.belongsTo(LGA, {
     }
 });
 
-User.sync();
+User.sync({ alter: true });
 State.sync();
 LGA.sync();
 NotablePeople.sync();
