@@ -301,6 +301,79 @@ Body:   {}
 }
 ```
 
+---
+#### GET method:  /emergency/lat/lng/Medical = lat is the latitude, lng is the longitude, Medical here means that the type of emergency details needed (this can be replaced with fire or police)
+---
+
+##### Request
+
+```
+Method: GET
+Path:   /api/v1/emergency/6.9234/3.8364/Medical
+Headers:   {
+  Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9sdXdhZmVyYW5taWFsYXVzYTIwMDFAZ21haWwuY29tIiwiaWF0IjoxNjk0OTY3Nzk3LCJleHAiOjE2OTUwMjE3OTd9.6MjRFAiJ6MmtHo-ZvJgjviSF8eBVkpO4KK1Hhk7mcIk',
+  'Content-Type': 'application/json'
+}
+Body:   {}
+```
+
+##### Response
+```
+{
+    "status": "success",
+    "emergencyContacts": [
+        {
+            "contactId": "41d4856b-d0c1-4775-81fd-a0a3bc142429",
+            "emergencyType": "medical",
+            "emergencyNo": "12345566",
+            "whatsappContact": "11111",
+            "createdAt": "2023-09-17T16:19:56.000Z",
+            "updatedAt": "2023-09-17T16:19:56.000Z",
+            "LGAId": "d6eef2e1-b588-413d-8c0d-b59ebae36ee3"
+        },
+        {
+            "contactId": "438e5bdf-f441-4ac4-a55d-ccce7ab5d501",
+            "emergencyType": "Medical",
+            "emergencyNo": "12345566",
+            "whatsappContact": "11111",
+            "createdAt": "2023-09-14T14:38:03.000Z",
+            "updatedAt": "2023-09-14T14:38:03.000Z",
+            "LGAId": "d6eef2e1-b588-413d-8c0d-b59ebae36ee3"
+        },
+        {
+            "contactId": "be052f15-0a83-4182-b47f-1928236ee615",
+            "emergencyType": "medical",
+            "emergencyNo": "12345566",
+            "whatsappContact": "11111",
+            "createdAt": "2023-09-17T16:03:29.000Z",
+            "updatedAt": "2023-09-17T16:03:29.000Z",
+            "LGAId": "d6eef2e1-b588-413d-8c0d-b59ebae36ee3"
+        },
+        {
+            "contactId": "f6e3e3e0-e87c-4ef4-a54e-4d2bc3bf4110",
+            "emergencyType": "Medical",
+            "emergencyNo": "12345566",
+            "whatsappContact": "11111",
+            "createdAt": "2023-09-14T14:38:24.000Z",
+            "updatedAt": "2023-09-14T14:38:24.000Z",
+            "LGAId": "d6eef2e1-b588-413d-8c0d-b59ebae36ee3"
+        }
+    ],
+    "notablePeople": [
+        {
+            "notableId": "8b51d626-889a-4dc3-a373-e3cc62f2bb2d",
+            "position": "Chief Medical Director, John Hopkins",
+            "personName": "Khidr Rodiyah",
+            "phoneNo": "091111111",
+            "whatsappContact": "091xxxxxxx",
+            "createdAt": "2023-09-17T16:19:56.000Z",
+            "updatedAt": "2023-09-17T16:19:56.000Z",
+            "LGAId": "d6eef2e1-b588-413d-8c0d-b59ebae36ee3"
+        }
+    ]
+}
+```
+
 
 ## Routes to populate database
 
