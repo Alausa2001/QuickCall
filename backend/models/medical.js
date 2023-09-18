@@ -12,21 +12,17 @@ MedicalInfo.init({
     },
     bloodType: {
         type: DataTypes.STRING(5), 
-        allowNull: false,
+        allowNull: true,
     },
     genotype: {
         type: DataTypes.STRING(5), 
-        allowNull: false,
+        allowNull: true,
     },
     allergies: {
         type: DataTypes.JSON, 
         allowNull: true,
     },
     chronicConditions: {
-        type: DataTypes.JSON, 
-        allowNull: true,
-    },
-    medEmerContact: {
         type: DataTypes.JSON, 
         allowNull: true,
     },

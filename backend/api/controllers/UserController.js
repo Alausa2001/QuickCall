@@ -1,11 +1,13 @@
 const bcrypt = require('bcrypt');
 const { mysqldb } = require('../../models/engine/mysql');
+const validatePhoneNo = require('../utils/validate_phoneno');
 const { User, MedicalInfo} = require('../../models/associations');
 
 
 
 class UserController {
     static async createProfile(req, res) {
+        const username = res.locals.username;
         let {
             firstName, lastName, email, phoneNo1, phoneNo2, age, gender,
             nameOfEmerContact,  emergencyPhoneNo, relationship,
@@ -28,7 +30,13 @@ class UserController {
             res.status(400).json({ status: 'bad request', message: 'main phone number missing' });
             return;
         }
+
+        if (!gender) {
+            res.status(400).json({ status: 'bad request', message: 'gender not specified' });
+            return;
+        }
       
+        /*
         let data = await validatePhoneNo(phoneNo1)
         if (data === null || (!data.carrier))  {
             res.status(400).json({ status: 'bad request', message: 'phone number 1 invalid' });
@@ -42,15 +50,17 @@ class UserController {
                 res.status(400).json({ status: 'bad request', message: 'phone number 2 invalid' });
                 return
             } 
-        } 
+        }
+        */
+
         try {
             const obj = {
                 firstName, lastName, email, phoneNo1, phoneNo2, age, gender,
                 nameOfEmerContact,  emergencyPhoneNo, relationship,
             };
-            const newUser = await mysqldb.createModel(User, obj);
-              delete newUser.password;
-              res.status(201).json({ status: 'success', newUser });
+            const user = await mysqldb.update(User, { username },  obj);
+              delete user.password;
+              res.status(201).json({ status: 'success', message: "profile created successfully" });
           } catch (err) {
               console.log(err)
               res.status(500).json({ error: `internal server error` });
@@ -58,10 +68,10 @@ class UserController {
     }
 
     static async submitMedicalInfo(req, res) {
-        const email = res.locals.email;
+        const username = res.locals.username;
         const {
             bloodType, genotype, allergies,
-            chronicConditions, medEmerContact, famDocContact,
+            chronicConditions, famDocContact,
         } = req.body
        
         if (!bloodType) {
@@ -73,10 +83,10 @@ class UserController {
             return
         }
         try {
-            const user = await mysqldb.get(User, { email }, ["userId"]);
+            const user = await mysqldb.get(User, { username }, ["userId"]);
             const obj = {
                 userId: user.userId, bloodType, genotype, allergies,
-                chronicConditions, medEmerContact, famDocContact,
+                chronicConditions,  famDocContact,
             };
             const medProfile = await mysqldb.createModel(MedicalInfo, obj);
             res.status(201).json({ status: 'success', message: "medical profile created", medInfo: medProfile });
@@ -89,10 +99,10 @@ class UserController {
     }
 
     static async getMedInfo(req, res) {
-        const email = res.locals.email;
+        const username = res.locals.username;
 
         try {
-            const user = await mysqldb.get(User, { email }, ['userId'])
+            const user = await mysqldb.get(User, { username }, ['userId'])
             const medInfo = await mysqldb.get(MedicalInfo, { userId: user.userId});
             res.status(201).json({ status: 'success', medicalInformaton: medInfo });
         } catch(err) {
@@ -103,7 +113,7 @@ class UserController {
     }
 
     static async updateMedInfo(req, res) {
-        const email = res.locals.email
+        const username = res.locals.username;
         const obj = req.body;
 
         const keys = Object.keys(obj);
@@ -115,13 +125,22 @@ class UserController {
 
         try {
 
-            const user = await mysqldb.get(User, { email }, ['userId']);
+            const user = await mysqldb.get(User, { username }, ['userId']);
 
             const arrAttributes = [ "chronicConditions", "allergies"]
             const medProfile = await mysqldb.get(MedicalInfo, { userId: user.userId }, arrAttributes);
             
             /* update medical information stored as array type */
-            if (obj.allergies && medProfile.allergies) {
+            if (medProfile === null) {
+                obj.userId = user.userId;
+                const newMedProfile = await mysqldb.createModel(MedicalInfo, obj);
+                res.status(200).json({
+                    status: "success", message: "medical information updated successfully",
+                    newMedProfile
+                });
+            }
+            
+            if (obj.allergies && medProfile.allergies !== null) {
                 for (let allergy of medProfile.allergies) {
                     if (!(obj.allergies.includes(allergy))) obj.allergies.push(allergy)
                 }
@@ -152,10 +171,10 @@ class UserController {
     }
 
     static async userInfo(req, res) {
-        const email = res.locals.email;
+        const username = res.locals.username;
 
         try {
-            const user = await mysqldb.get(User, { email });
+            const user = await mysqldb.get(User, { username });
             delete user.password;
             res.status(200).json({ status: 'success', userInformation: user });
         } catch(err) {
@@ -166,8 +185,9 @@ class UserController {
             return;
         }   
     }
+
     static async updateProfile(req, res) {
-        const email = res.locals.email;
+        const username = res.locals.username;
         const obj = req.body;
         
         if (obj.password) {
@@ -180,7 +200,7 @@ class UserController {
             if (!(obj[key])) delete obj[key];
         }
         try {
-            const updated = await mysqldb.update(User, { email }, obj)
+            const updated = await mysqldb.update(User, { username }, obj)
             if (updated[0] > 0) {
                 res.status(200).json({ status: "success", message: "profile updated successfully" });
                 return;

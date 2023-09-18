@@ -24,7 +24,7 @@ def get_states():
 def post_lgas():
     
     data = {
-        "LGAs": [ 'Ijebu North', 'Abeokuta'], "stateId": "ae6b4ac5-e75f-4b7b-814a-8fa7523fe7ab"
+        "LGAs": [ 'Ijebu North', 'Abeokuta'], "stateId": "60a876fb-41b0-493b-bd41-857242326e28"
     }
     header = {'Content-Type': 'application/json'}
     res = requests.post('http://localhost:4000/api/v1/admin/add_local_governments', json=data, headers=header)
@@ -35,7 +35,7 @@ def get_lgas():
     print('\n List of LGAs\n')
 
     header = {'Content-Type': 'application/json'}
-    res = requests.get('http://localhost:4000/api/v1/admin/ae6b4ac5-e75f-4b7b-814a-8fa7523fe7ab/get_local_governments', headers=header)
+    res = requests.get('http://localhost:4000/api/v1/admin/60a876fb-41b0-493b-bd41-857242326e28/get_local_governments', headers=header)
     print(dumps(res.json(), indent=4))
 
 def delete_lgas():
@@ -51,7 +51,7 @@ def post_contacts():
         "emergencyType": 'Medical', "emergencyNo": '12345566', "whatsappContact": "11111"
     }
     header = {'Content-Type': 'application/json'}
-    res = requests.post('http://localhost:4000/api/v1/admin/add_emergency_contacts/d6eef2e1-b588-413d-8c0d-b59ebae36ee3', json=data, headers=header)
+    res = requests.post('http://localhost:4000/api/v1/admin/add_emergency_contacts/62145996-90df-4de9-bdd6-e405fec7fdde', json=data, headers=header)
     print(dumps(res.json(), indent=4))
 
 
@@ -60,7 +60,7 @@ def get_contacts():
     print('\n List of contacts of LGAs\n')
 
     header = {'Content-Type': 'application/json'}
-    res = requests.get('http://localhost:4000/api/v1/admin/emergency_contacts/d6eef2e1-b588-413d-8c0d-b59ebae36ee3', headers=header)
+    res = requests.get('http://localhost:4000/api/v1/admin/emergency_contacts/62145996-90df-4de9-bdd6-e405fec7fdde', headers=header)
     print(dumps(res.json(), indent=4))
 
 def delete_contact():
@@ -77,7 +77,7 @@ def post_notable():
         "whatsappContact": "091xxxxxxx", "phoneNo": '091111111'
     }
     header = {'Content-Type': 'application/json'}
-    res = requests.post('http://localhost:4000/api/v1/admin/add_notable_personality/d6eef2e1-b588-413d-8c0d-b59ebae36ee3', json=data, headers=header)
+    res = requests.post('http://localhost:4000/api/v1/admin/add_notable_personality/62145996-90df-4de9-bdd6-e405fec7fdde', json=data, headers=header)
     print(dumps(res.json(), indent=4))
 
 
@@ -99,15 +99,15 @@ def delete_notable():
 
 
 if __name__ == "__main__":
-    #post_states()
-    #get_states()
-    #post_lgas()
-    #get_lgas()
-    #delete_lgas()
+    post_states()
+    get_states()
+    post_lgas()
+    get_lgas()
+    delete_lgas()
     post_contacts()
-    #get_contacts()
-    #delete_contact()
+    get_contacts()
+    delete_contact()
     post_notable()
     get_notable()
-    #delete_notable()
+    delete_notable()
     get_notable()

@@ -70,7 +70,7 @@ class AuthController {
             return;
         }
         // generates jwt
-        const token = jwt.sign({ email: user.username }, process.env.SECRET_KEY, { expiresIn: '15h' });
+        const token = jwt.sign({ username: user.username }, process.env.SECRET_KEY, { expiresIn: '15h' });
         res.setHeader('Access-Control-Expose-Headers', 'Authorization');
         res.status(200).header('Authorization', `Bearer ${token}`).json({ status: 'success', user});
         return

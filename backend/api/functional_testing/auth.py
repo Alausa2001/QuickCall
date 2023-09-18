@@ -5,8 +5,7 @@ from sys import argv
 
 def signup():
     data = {
-        'firstName': 'abdul', 'lastName': 'abdul', 'username': 'abdul', 'phoneNo1': '08160969769',
-        'email': 'oluwaferanmialausa2001@gmail.com', 'password': 'abdul', 'phoneNo2': '07019302484'
+        'username': 'abdul', 'password': 'abdul',
     }
     header = {'Content-Type': 'application/json'}
     res = requests.post('http://localhost:4000/api/v1/auth/signup', headers=header, json=data)
@@ -14,13 +13,32 @@ def signup():
     print(dumps(res.json(), indent=4))
 
 def signin():
-    data = {'username': 'abdul1', 'password': 'abdul1'}
+    data = {
+        'username': 'abdul', 'password': 'abdul',
+    }
     header = {'Content-Type': 'application/json'}
     res = requests.post('http://localhost:4000/api/v1/auth/signin', headers=header, json=data)
     print(res.headers.get('Authorization'))
     print(res.json)
     print(dumps(res.json(), indent=4))
     return res.headers.get('Authorization')
+
+
+
+def profile(token):
+    data = {
+        'firstName': 'abdul', 'lastName': 'abdul', 'phoneNo1': '08160969769', 'age': '22',
+        'gender': 'male', "nameOfEmerContact": 'badaru basirah',
+        "relationship": 'wife',
+        "emerContactPhoneNo": '090XXXXXXX',
+        'email': 'oluwaferanmialausa2001@gmail.com', 'phoneNo2': '07019302484'
+    }
+    header = {'Content-Type': 'application/json', 'authorization': token}
+    res = requests.post('http://localhost:4000/api/v1/profile/create', headers=header, json=data)
+    print(res.json)
+    print(dumps(res.json(), indent=4))
+    return res.headers.get('Authorization')
+
 
 def contact(token):
     
@@ -32,4 +50,5 @@ def contact(token):
 if __name__ == "__main__":
     signup()
     token = signin()
-    contact(token)
+    profile(token)
+    #contact(token)

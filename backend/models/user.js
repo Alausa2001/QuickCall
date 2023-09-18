@@ -43,7 +43,7 @@ User.init({
         allowNull: true,
     },
     gender: {
-        type: DataTypes.STRING(5), 
+        type: DataTypes.STRING(10), 
         allowNull: true,
     },
     nameOfEmerContact: {
@@ -54,7 +54,7 @@ User.init({
         type: DataTypes.STRING(255), 
         allowNull: true,
     },
-    emerContactPhoneNo: {
+    emergencyPhoneNo: {
         type: DataTypes.STRING(15), 
         allowNull: true,
     }

@@ -5,8 +5,7 @@ from sys import argv
 
 def signup():
     data = {
-        'firstName': 'abdul', 'lastName': 'abdul', 'username': 'abdul', 'phoneNo1': '08160969769',
-        'email': 'oluwaferanmialausa2001@gmail.com', 'password': 'abdul',
+        'username': 'bdul', 'password': 'abdul',
     }
     header = {'Content-Type': 'application/json'}
     res = requests.post('http://localhost:4000/api/v1/auth/signup', headers=header, json=data)
@@ -14,12 +13,28 @@ def signup():
     print(dumps(res.json(), indent=4))
 
 def signin():
-    data = {'username': 'abdul1', 'password': 'abdul1'}
+    data = {
+        'username': 'bdul', 'password': 'abdul',
+    }
     header = {'Content-Type': 'application/json'}
     res = requests.post('http://localhost:4000/api/v1/auth/signin', headers=header, json=data)
     print(res.headers.get('Authorization'))
     print(res.json)
-    #print(dumps(res.json(), indent=4))
+    print(dumps(res.json(), indent=4))
+    return res.headers.get('Authorization')
+
+def profile(token):
+    data = {
+        'firstName': 'Wale', 'lastName': 'Adenuga', 'phoneNo1': '08160969769', 'age': '22',
+        'gender': 'male', "nameOfEmerContact": 'badaru basirah',
+        "relationship": 'wifey',
+        "emergencyPhoneNo": "0909xxxxxxx",
+        'email': 'oluwaferanmialausa2001@gmail.com', 'phoneNo2': '07019302484'
+    }
+    header = {'Content-Type': 'application/json', 'authorization': token}
+    res = requests.post('http://localhost:4000/api/v1/profile/create', headers=header, json=data)
+    print(res.json)
+    print(dumps(res.json(), indent=4))
     return res.headers.get('Authorization')
 
 def medical(token):
@@ -51,7 +66,7 @@ def medical(token):
 def update_profile(token):
     print('\n Update user profile\n')
     data = {
-        'password': 'abdul1', 'username': 'abdul1'
+        'firstName': 'Walex', 'age': '44', "emergencyPhoneNo": "0909xxxxxxx"
     }
     header = {'Content-Type': 'application/json', 'authorization': token}
     res = requests.patch('http://localhost:4000/api/v1/profile/basic_information/update', headers=header, json=data)
@@ -64,5 +79,6 @@ def update_profile(token):
 if __name__ == "__main__":
     signup()
     token = signin()
+    profile(token)
     medical(token)
     update_profile(token)
