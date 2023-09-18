@@ -21,7 +21,7 @@ async function validatePhoneNo(phoneNo) {
         if (response.data.isValidNumber === true) return response.data;
         return null;
     } catch (error) {
-        console.error(error.message);
+        console.error(error);
         throw new Error(error);
     }
 }

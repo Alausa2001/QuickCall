@@ -172,7 +172,7 @@ class PopulateDBController {
 
         try {
             const obj = {
-                LGAId, emergencyNo, emergencyType, whatsappContact
+                LGAId, emergencyNo, emergencyType: emergencyType.toLowerCase(), whatsappContact
             };
             const contact = await mysqldb.createModel(EmergencyContacts, obj);
             res.status(201).json({
