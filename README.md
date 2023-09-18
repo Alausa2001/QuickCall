@@ -2,7 +2,7 @@
 This app can be a valuable tool for people who are looking for quick and easy access to emergency assistance. It can also help people to stay safe in an emergency situation. We are building this app for an hackathon
 
 # API DOCUMENTATION
-Documetation of the API endpoints for CargoLink
+Documetation of the API endpoints for QuickCall
 
 #### Base URL 
 ``` http://qcall.feranmi.tech/api/v1 ```
@@ -20,28 +20,15 @@ Documetation of the API endpoints for CargoLink
 ##### Parameters: 
 | fields | Required | No of characters| DataType|
 | ---- | --- | --- | ---|
-| firstName  | yes |  max 35| string |
-| lastName  | yes | max 35 | string |
 | password  | yes | between 8 - 15 characters| string |
-| email | yes | max 100 characters | string |
 | username| yes | max 35 characters | string |
-| phoneNo1 | yes | max 14 characters | string |
-| phoneNo2 | optional | max 14 characters | string |
 
 ##### Request
 ```
 Method: POST
 Path:   /api/v1/auth/signup
 Headers:   { Authorization: undefined, 'Content-Type': 'application/json' }
-Body:   {
-  firstName: 'abdul',
-  lastName: 'abdul',
-  username: 'abdul',
-  phoneNo1: '08160969769',
-  email: 'oluwaferanmialausa2001@gmail.com',
-  password: 'abdul1234',
-  phoneNo2: '07019302484'
-}
+Body:   { username: 'abdul', password: 'abdul' }
 ```
 
 
@@ -51,15 +38,10 @@ Body:   {
 {
     "status": "success",
     "newUser": {
-        "userId": "4b156fd4-7b18-4e61-a189-84608801bf1f",
-        "firstName": "abdul",
-        "lastName": "abdul",
-        "email": "oluwaferanmialausa2001@gmail.com",
+        "userId": "b37910c9-9387-4d5b-bd6b-8e88e13a69ba",
         "username": "abdul",
-        "phoneNo1": "08160969769",
-        "phoneNo2": "07019302484",
-        "updatedAt": "2023-09-11T14:55:57.618Z",
-        "createdAt": "2023-09-11T14:55:57.618Z"
+        "updatedAt": "2023-09-18T12:51:32.845Z",
+        "createdAt": "2023-09-18T12:51:32.845Z"
     }
 }
 ```
@@ -90,19 +72,76 @@ Body:   { username: 'abdul', password: 'abdul1234' }
 {
     "status": "success",
     "user": {
-        "userId": "4b156fd4-7b18-4e61-a189-84608801bf1f",
-        "firstName": "abdul",
-        "lastName": "abdul",
-        "email": "oluwaferanmialausa2001@gmail.com",
+        "userId": "b37910c9-9387-4d5b-bd6b-8e88e13a69ba",
+        "firstName": null,
+        "lastName": null,
+        "email": null,
         "username": "abdul",
-        "phoneNo1": "08160969769",
-        "phoneNo2": "07019302484",
-        "createdAt": "2023-09-11T14:55:57.000Z",
-        "updatedAt": "2023-09-11T14:55:57.000Z"
+        "phoneNo1": null,
+        "phoneNo2": null,
+        "age": null,
+        "gender": null,
+        "nameOfEmerContact": null,
+        "relationship": null,
+        "emergencyPhoneNo": null,
+        "createdAt": "2023-09-18T12:51:32.000Z",
+        "updatedAt": "2023-09-18T12:51:32.000Z"
     }
 }
 ```
 
+---
+#### POST method:  /profile/create
+---
+
+##### Parameters: 
+| fields | Required | No of characters| DataType|
+| ---- | --- | --- | ---|
+| firstName  | yes |  max 35| string |
+| lastName  | yes | max 35 | string |
+| email | yes | max 100 characters | string |
+| phoneNo1 | yes | max 14 characters | string |
+| gender  | yes| max 10| string |
+| age | optional | max 5 | string |
+|nameOfEmerContact| optional | max 100 | string |
+| relationship| optional | max 100 | string |
+| emergencyPhoneNo | optional | max 14 | string |
+| phoneNo2 | optional | max 14 characters | string |
+
+nameOfEmerContact = name of someone that can make emergency decisions on users' behalf
+emergencyPhoneNo = phone no of someone that can make emergency decisions on users' behalf
+relationship = relationhip with the person
+
+##### Request
+```
+Method: POST
+Path:   /api/v1/profile/create
+Headers:   {
+  Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFiZHVsIiwiaWF0IjoxNjk1MDQxNDkyLCJleHAiOjE2OTUwOTU0OTJ9.bGitozX2nOQiIam7Z5WkQgtFMI_xO6jHhT_pTjHzMJc',
+  'Content-Type': 'application/json'
+}
+Body:   {
+  firstName: 'Wale',
+  lastName: 'Adenuga',
+  phoneNo1: '08160969769',
+  age: '22',
+  gender: 'male',
+  nameOfEmerContact: 'badaru basirah',
+  relationship: 'wifey',
+  emergencyPhoneNo: '090XXXXXXX',
+  email: 'oluwaferanmialausa2001@gmail.com',
+  phoneNo2: '07019302484'
+}
+```
+
+##### Response
+
+```
+{
+    "status": "success",
+    "message": "profile created successfully"
+}
+```
 
 ---
 #### POST method:  /profile/medical_information/submit
@@ -114,7 +153,6 @@ Body:   { username: 'abdul', password: 'abdul1234' }
 | bloodType  | yes |  max 4 | string |
 | genotype  | yes | max 4 | string |
 | famDocContact  | optional | max 14 characters| string |
-| medEmerContact | optional | - | array |
 | allergies| optional | - | array |
 | chronicConditions | optional | - | array |
 
@@ -122,7 +160,6 @@ Note:
 
 famDocContact = users' family doctor's contact
 
-medEmerContact = contact of persons that can make medical decisions on users' behalf
 
 
 ##### Request
@@ -138,7 +175,6 @@ Body:   {
   bloodType: 'A+',
   genotype: 'AS',
   famDocContact: '020200000',
-  "medEmerContact": [ "0200000" ],
   allergies: [ 'dust' ],
   chronicConditions: [ 'asthma' ]
 }
@@ -161,7 +197,6 @@ Body:   {
         "chronicConditions": [
             "asthma"
         ],
-        "medEmerContact": [ "0200000" ],
         "famDocContact": "020200000",
         "updatedAt": "2023-09-11T16:03:25.553Z",
         "createdAt": "2023-09-11T16:03:25.553Z"
