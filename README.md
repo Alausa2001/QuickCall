@@ -580,11 +580,79 @@ Body:   {
 ##### Response
 
 ```
+{
+    "status": "success",
+    "message": "Feedback sent",
+    "feedback": {
+        "feedbackId": "757b269a-4d23-4901-bbbb-94e717d0c3e1",
+        "comment": "The man said and I said, he said and I said she said and I said we said and I said. Thank you, I love quickcall. The best emergency app",
+        "emergencyType": "Medical",
+        "emergencyContact": "09999",
+        "userId": "b37910c9-9387-4d5b-bd6b-8e88e13a69ba",
+        "username": "abdul",
+        "updatedAt": "2023-09-19T12:28:32.781Z",
+        "createdAt": "2023-09-19T12:28:32.781Z"
+    }
+}
+```
 
+---
+GET method: /emergency/my_feedbacks = For users' to retrieve their previous feedbacks
+---
+
+##### Request
+
+```
+Method: GET
+Path:   /api/v1/emergency/my_feedbacks
+Headers:   {
+  Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFiZHVsIiwiaWF0IjoxNjk1MTI2NTEyLCJleHAiOjE2OTUxODA1MTJ9.Bc2mdFk_24xY-1MQC2mYZiWCsAINjA3eDKPjwhNbb3M',
+  'Content-Type': 'application/json'
+}
+Body:   {}
+```
+
+##### Response
+```
+{
+    "status": "success",
+    "feedbacks": [
+        {
+            "feedbackId": "1b425d3d-1d4d-4256-b7a4-f171b59362d9",
+            "username": "abdul",
+            "emergencyType": "Medical",
+            "comment": "The man said and I said, he said and I said she said and I said we said and I said. Thank you, I love quickcall. The best emergency app",
+            "emergencyContact": "09999",
+            "createdAt": "2023-09-19T11:48:30.000Z",
+            "updatedAt": "2023-09-19T11:48:30.000Z",
+            "userId": "b37910c9-9387-4d5b-bd6b-8e88e13a69ba"
+        },
+        {
+            "feedbackId": "757b269a-4d23-4901-bbbb-94e717d0c3e1",
+            "username": "abdul",
+            "emergencyType": "Medical",
+            "comment": "The man said and I said, he said and I said she said and I said we said and I said. Thank you, I love quickcall. The best emergency app",
+            "emergencyContact": "09999",
+            "createdAt": "2023-09-19T12:28:32.000Z",
+            "updatedAt": "2023-09-19T12:28:32.000Z",
+            "userId": "b37910c9-9387-4d5b-bd6b-8e88e13a69ba"
+        },
+        {
+            "feedbackId": "cbc87a04-6a95-4647-b9c9-ccd1dc44c9f9",
+            "username": "abdul",
+            "emergencyType": "Medical",
+            "comment": "The man said and I said, he said and I said she said and I said we said and I said. Thank you, I love quickcall. The best emergency app",
+            "emergencyContact": "09999",
+            "createdAt": "2023-09-19T12:02:52.000Z",
+            "updatedAt": "2023-09-19T12:02:52.000Z",
+            "userId": "b37910c9-9387-4d5b-bd6b-8e88e13a69ba"
+        }
+    ]
+}
 ```
 
 
-
+## ADMIN
 ## Routes to populate database
 
 ---
@@ -945,6 +1013,50 @@ Body:   {}
 }
 ```
 
+
+---
+GET method: /admin/feedbacks/:startDate/:endDate = To get all feedbacks received between the time range specified
+---
+
+##### Request
+
+```
+Method: GET
+Path:   /api/v1/admin/feedbacks/2023-07-15/2023-09-20
+Headers:   { Authorization: undefined, 'Content-Type': 'application/json' }
+Body:   {}
+```
+
+
+##### Response
+
+```
+{
+    "status": "success",
+    "feedbacks": [
+        {
+            "feedbackId": "3c22bf59-56d8-40ab-9945-5500b668b232",
+            "username": "",
+            "emergencyType": "Medical",
+            "comment": "The man said and I said, he said and I said she said and I said we said and I said. Thank you, I love quickcall. The best emergency app",
+            "emergencyContact": "09999",
+            "createdAt": "2023-09-19T11:25:20.000Z",
+            "updatedAt": "2023-09-19T11:25:20.000Z",
+            "userId": "b37910c9-9387-4d5b-bd6b-8e88e13a69ba"
+        },
+        {
+            "feedbackId": "757b269a-4d23-4901-bbbb-94e717d0c3e1",
+            "username": "abdul",
+            "emergencyType": "Medical",
+            "comment": "The man said and I said, he said and I said she said and I said we said and I said. Thank you, I love quickcall. The best emergency app",
+            "emergencyContact": "09999",
+            "createdAt": "2023-09-19T12:28:32.000Z",
+            "updatedAt": "2023-09-19T12:28:32.000Z",
+            "userId": "b37910c9-9387-4d5b-bd6b-8e88e13a69ba"
+        }
+    ]
+}
+```
 
 
 
