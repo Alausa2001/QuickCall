@@ -558,6 +558,32 @@ Body:   {}
 }
 ```
 
+---
+POST method: /emergency/feedback = To give feedback on a service
+---
+
+##### Request
+```
+Method: POST
+Path:   /api/v1/emergency/feedback
+Headers:   {
+  Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFiZHVsIiwiaWF0IjoxNjk1MTI2NTEyLCJleHAiOjE2OTUxODA1MTJ9.Bc2mdFk_24xY-1MQC2mYZiWCsAINjA3eDKPjwhNbb3M',
+  'Content-Type': 'application/json'
+}
+Body:   {
+  comment: 'The man said and I said, he said and I said she said and I said we said and I said. Thank you, I love quickcall. The best emergency app',
+  emergencyType: 'Medical',
+  emergencyContact: '09999'
+}
+```
+
+##### Response
+
+```
+
+```
+
+
 
 ## Routes to populate database
 
