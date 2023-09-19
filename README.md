@@ -406,6 +406,155 @@ Body:   {}
             "LGAId": "d6eef2e1-b588-413d-8c0d-b59ebae36ee3"
         }
     ]
+   "nearby_places": [
+        {
+            "user_ratings_total": 0,
+            "vicinity": "39,Adeola Odutola College Road",
+            "lat": 6.8299226,
+            "lng": 3.9164152,
+            "name": "Jolaolu Medical Centre",
+            "opening_hours": {
+                "open_now": true
+            }
+        },
+        {
+            "user_ratings_total": 0,
+            "vicinity": "RXQ8+P9F, Erunwon",
+            "lat": 6.839311299999999,
+            "lng": 3.9659159,
+            "name": "Erunwon Health Clinic"
+        },
+        {
+            "user_ratings_total": 0,
+            "vicinity": "2Q57+3V9, Bale",
+            "lat": 7.007651000000001,
+            "lng": 3.7647455,
+            "name": "Imagbon Health Clinic"
+        },
+        {
+            "user_ratings_total": 0,
+            "vicinity": "WP2X+2X2, Irolu",
+            "lat": 6.899999999999999,
+            "lng": 3.749899999999999,
+            "name": "Irolu Health Clinic"
+        },
+        {
+            "user_ratings_total": 0,
+            "vicinity": "VPX5+43G, Ilishan-Remo",
+            "lat": 6.8978063,
+            "lng": 3.707687,
+            "name": "Ilisan II Health Clinic",
+            "opening_hours": {}
+        },
+        {
+            "user_ratings_total": 0,
+            "vicinity": "2P7M+HX6, Ogunti",
+            "lat": 7.0139,
+            "lng": 3.7349,
+            "name": "Iyankan Health Clinic"
+        },
+        {
+            "user_ratings_total": 0,
+            "vicinity": "WQ5C+V9J, Araromi Ake",
+            "lat": 6.9097,
+            "lng": 3.7709,
+            "name": "Ijebu-Ijesha Health Clinic"
+        },
+        {
+            "user_ratings_total": 2,
+            "vicinity": "VPR9+H84, Ikenne-Isara Road, Ilishan-Remo",
+            "lat": 6.891392,
+            "lng": 3.7183255,
+            "name": "Medical Diagnostics Center"
+        },
+        {
+            "user_ratings_total": 0,
+            "vicinity": "XP7F+6VP, Akaka",
+            "lat": 6.9631,
+            "lng": 3.7247,
+            "name": "Akaka Health Clinic"
+        },
+        {
+            "user_ratings_total": 0,
+            "vicinity": "VP87+23G, Ikenne",
+            "lat": 6.8650737,
+            "lng": 3.712695399999999,
+            "name": "Itunmoro Health Clinic",
+            "opening_hours": {}
+        },
+        {
+            "user_ratings_total": 0,
+            "vicinity": "VV8P+56C, Road, Imodi",
+            "lat": 6.865515299999999,
+            "lng": 3.8855121,
+            "name": "Ataye\u1e63e Health Club of Imodi - Ijebu",
+            "opening_hours": {}
+        },
+        {
+            "user_ratings_total": 0,
+            "vicinity": "VX24+CFQ, Ogbogbo",
+            "lat": 6.8510882,
+            "lng": 3.9562197,
+            "name": "Gbogojari Health Clinic"
+        },
+        {
+            "user_ratings_total": 0,
+            "vicinity": "RX38+QC6, Ijebu Ode",
+            "lat": 6.804399999999999,
+            "lng": 3.966,
+            "name": "Ilese Health Clinic"
+        },
+        {
+            "user_ratings_total": 0,
+            "vicinity": "XRCJ+VXJ, Ishamuro",
+            "lat": 6.9722,
+            "lng": 3.8324,
+            "name": "Ishamuro Health Centre"
+        },
+        {
+            "user_ratings_total": 0,
+            "vicinity": "RQW9+XG3, Odogbolu",
+            "lat": 6.8473988,
+            "lng": 3.7687895,
+            "name": "Odogbolu 1 Community Health Clinic"
+        },
+        {
+            "user_ratings_total": 0,
+            "vicinity": "RW99+5H2, Ijebu Ode",
+            "lat": 6.8179985,
+            "lng": 3.9189292,
+            "name": "Imupa.Iyanro Health Clinic"
+        },
+        {
+            "user_ratings_total": 0,
+            "vicinity": "VR37+XJP, Okun-Owa",
+            "lat": 6.8551248,
+            "lng": 3.8140777,
+            "name": "Okun-Owa Health Clinic",
+            "opening_hours": {}
+        },
+        {
+            "user_ratings_total": 0,
+            "vicinity": "WWPC+GQ4, Ago-Iwoye",
+            "lat": 6.936254399999999,
+            "lng": 3.9219553,
+            "name": "Oke-Odo Health Clinic"
+        },
+        {
+            "user_ratings_total": 0,
+            "vicinity": "RWPV+V3P, Ijebu Ode",
+            "lat": 6.8372157,
+            "lng": 3.9427095,
+            "name": "Igbala Health Clinic"
+        },
+        {
+            "user_ratings_total": 0,
+            "vicinity": "WWXV+RH2, Oru",
+            "lat": 6.9495,
+            "lng": 3.9439,
+            "name": "Oru Health Centre"
+        }
+    ]
 }
 ```
 
