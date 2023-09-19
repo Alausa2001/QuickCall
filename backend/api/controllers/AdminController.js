@@ -1,9 +1,49 @@
 const { Op } = require('sequelize');
 const { mysqldb } = require('../../models/engine/mysql');
-const { State, LGA, NotablePeople, EmergencyContacts, Feedbacks } = require('../../models/associations');
+const {
+    Admin, State, LGA, NotablePeople, EmergencyContacts, Feedbacks
+} = require('../../models/associations');
 
 
 class AdminController {
+    static async signin(req, res) {
+        const { password, username } = req.body;
+
+        if (!password) {
+            res.status(400).json({ status: 'bad request', message: 'password missing' });
+            return;
+        }
+        if (!username) {
+            res.status(400).json({ status: 'bad request', message: 'username missing' });
+            return;
+        }
+
+        const filter = { username };
+        let admin;
+        try {
+            admin = await mysqldb.get(Admin, filter);
+            if (!admin) {
+                res.status(400).json({ status: 'bad request', message: 'admin account not found' });
+                return;
+            }
+            const validPassword = await bcrypt.compare(password, admin.password);
+            if (!validPassword) {
+                res.status(400).json({ status: 'bad request', message: 'invalid password' });
+                return;
+            }
+            delete admin.password;
+        } catch(err) {
+            console.log(err);
+            res.status(500).json({ error: "internal server error" });
+            return;
+        }
+        // generates jwt
+        const token = jwt.sign({ username: admin.username }, process.env.ADMIN_SECRET_KEY, { expiresIn: '15h' });
+        res.setHeader('Access-Control-Expose-Headers', 'Authorization');
+        res.status(200).header('Authorization', `Bearer ${token}`).json({ status: 'success', admin});
+        return
+    }
+
 
     static async addStates(req, res) {
         const { states } = req.body;

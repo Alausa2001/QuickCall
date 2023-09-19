@@ -68,5 +68,5 @@ if __name__ == "__main__":
     token = signin()
     #profile(token)
     #contact(token)
-    #feedback(token)
+    feedback(token)
     feedbacks(token)
