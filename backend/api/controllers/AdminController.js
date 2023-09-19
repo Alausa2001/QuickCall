@@ -1,7 +1,9 @@
-const { State, LGA, NotablePeople, EmergencyContacts } = require('../../models/associations');
+const { Op } = require('sequelize');
 const { mysqldb } = require('../../models/engine/mysql');
+const { State, LGA, NotablePeople, EmergencyContacts, Feedbacks } = require('../../models/associations');
 
-class PopulateDBController {
+
+class AdminController {
 
     static async addStates(req, res) {
         const { states } = req.body;
@@ -316,7 +318,37 @@ class PopulateDBController {
         return;
         }
     }
+
+    static async getUsersFeedbacks(req, res) {
+        let { startDate, endDate } = req.params;
+        startDate = startDate.split('-');
+        endDate = endDate.split('-');
+        
+        try {
+            startDate = new Date(parseInt(startDate[0]), parseInt(startDate[1]) - 1, parseInt(startDate[2]));
+            endDate = new Date(parseInt(endDate[0]), parseInt(endDate[1]) - 1, parseInt(endDate[2]));
+
+            const feedbacks = await Feedbacks.findAll({
+                where: {createdAt: { [Op.between]: [startDate, endDate]}}
+            });
+
+            if (feedbacks) {
+                res.status(200).json({ status: 'success', feedbacks });
+                return;
+            }
+
+            res.status(404).json({ status: 'not found', message: 'No feedbacks yet'});
+            return;
+
+        } catch(err) {
+            console.log(err);
+            res.status(500).json({
+                status: 'internal server error', message: "error occurred while retrieving feedbacks"
+            });
+            return;
+        }
+    }
 }
 
 
-module.exports = PopulateDBController;
+module.exports = AdminController;

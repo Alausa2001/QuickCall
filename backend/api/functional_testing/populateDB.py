@@ -85,7 +85,7 @@ def get_notable():
     print('\n List of personalities of LGAs\n')
 
     header = {'Content-Type': 'application/json'}
-    res = requests.get('http://localhost:4000/api/v1/admin/notable_people/d6eef2e1-b588-413d-8c0d-b59ebae36ee3', headers=header)
+    res = requests.get('http://localhost:4000/api/v1/admin/notable_people/62145996-90df-4de9-bdd6-e405fec7fdde', headers=header)
     print(dumps(res.json(), indent=4))
 
 
@@ -96,18 +96,24 @@ def delete_notable():
     res = requests.delete('http://localhost:4000/api/v1/admin/notable_people/5e5ebc88-885f-4878-ac91-dd6a30a34d07/delete', headers=header)
     print(dumps(res.json(), indent=4))
 
+def get_feedbacks():
+    print('\nfeedbacks\n')
 
+    header = {'Content-Type': 'application/json'}
+    res = requests.get('http://localhost:4000/api/v1/admin/feedbacks/2023-07-15/2023-09-20', headers=header)
+    print(dumps(res.json(), indent=4))
 
 if __name__ == "__main__":
-    post_states()
-    get_states()
-    post_lgas()
-    get_lgas()
-    delete_lgas()
-    post_contacts()
-    get_contacts()
-    delete_contact()
-    post_notable()
-    get_notable()
-    delete_notable()
-    get_notable()
+    #post_states()
+    #get_states()
+    #post_lgas()
+    #get_lgas()
+    #delete_lgas()
+    #post_contacts()
+    #get_contacts()
+    #delete_contact()
+    #post_notable()
+    #get_notable()
+    #delete_notable()
+    #get_notable()
+    get_feedbacks()

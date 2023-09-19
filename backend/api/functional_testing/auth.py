@@ -47,8 +47,26 @@ def contact(token):
     print(dumps(res.json(), indent=4))
 
 
+def feedback(token):
+    data = { 'comment': "The man said and I said, he said and I said she said and I said we said and I said. Thank you, I love quickcall. The best emergency app",
+             "emergencyType": "Medical", "emergencyContact": "09999"
+        }
+    header = {'Content-Type': 'application/json', "authorization": token}
+    res = requests.post('http://localhost:4000/api/v1/emergency/feedback', headers=header, json=data)
+    print(dumps(res.json(), indent=4))
+
+def feedbacks(token):
+    data = { 'comment': "The man said and I said, he said and I said she said and I said we said and I said. Thank you, I love quickcall. The best emergency app",
+             "emergencyType": "Medical", "emergencyContact": "09999"
+        }
+    header = {'Content-Type': 'application/json', "authorization": token}
+    res = requests.get('http://localhost:4000/api/v1/emergency/my_feedbacks', headers=header, json=data)
+    print(dumps(res.json(), indent=4))
+
 if __name__ == "__main__":
     signup()
     token = signin()
     #profile(token)
-    contact(token)
+    #contact(token)
+    #feedback(token)
+    feedbacks(token)
