@@ -1,4 +1,5 @@
 const geocode = require('../utils/geocode'); 
+const getNearbyPlaces = require('../utils/nearby_places');
 const { mysqldb } = require('../../models/engine/mysql');
 const { NotablePeople, EmergencyContacts, LGA } = require('../../models/associations');
 
@@ -24,9 +25,12 @@ class EmergencyController {
                 if (lga) {
                     const emergencyContacts = await mysqldb.getAll(EmergencyContacts,
                         { LGAId: lga.LGAId, emergencyType: emergencyType.toLowerCase() });
+                    
                     const notablePeople = await mysqldb.getAll(NotablePeople, { LGAId: lga.LGAId });
+                    const location = `${lat},${lng}`;
+                    const nearby_places = await getNearbyPlaces(emergencyType, location);
 
-                    res.status(200).json({ status: "success", emergencyContacts, notablePeople });
+                    res.status(200).json({ status: "success", emergencyContacts, notablePeople, nearby_places });
                     return;
                 }
                 res.status(404).json({ status: "not found", message: "LGA details not uploaded yet" });
