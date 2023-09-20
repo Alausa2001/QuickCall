@@ -1,4 +1,5 @@
 const State = require('./state');
+const Admin = require('./admin');
 const User = require('./user');
 const LGA = require('./local_government');
 const Feedbacks = require('./feedback');
@@ -60,9 +61,14 @@ NotablePeople.sync();
 EmergencyContacts.sync();
 MedicalInfo.sync();
 Feedbacks.sync();
+Admin.sync();
 
 
 
 
-module.exports = { User, State, LGA, NotablePeople, EmergencyContacts, MedicalInfo, Feedbacks };
+
+
+
+
+module.exports = { Admin, User, State, LGA, NotablePeople, EmergencyContacts, MedicalInfo, Feedbacks };
 

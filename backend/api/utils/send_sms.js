@@ -1,6 +1,8 @@
 const axios = require("axios");
 
-// Not working yet
+// Not working yet - I am getting username is required error even though I
+// added my username to the request body
+
 async function send_sms(phoneNo) {
     try {
         const options = {
