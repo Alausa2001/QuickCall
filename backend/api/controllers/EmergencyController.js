@@ -32,7 +32,7 @@ class EmergencyController {
                     const location = `${lat},${lng}`;
                     const nearby_places = await getNearbyPlaces(emergencyType, location);
 
-                    const emergencyTips = await mysqldb.get(
+                    const emergencyTips = await mysqldb.getAll(
                         EmergencyTips, { category: emergencyType.toLowerCase() }
                         );
 
