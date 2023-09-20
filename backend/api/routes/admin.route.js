@@ -29,5 +29,5 @@ adminRouter.delete('/notable_people/:notableId/delete', logger, adminAuthorizati
 adminRouter.get('/feedbacks/:startDate/:endDate', logger, adminAuthorization, AdminController.getUsersFeedbacks);
 
 adminRouter.post('/add_emergency_tips', logger, adminAuthorization, AdminController.addEmergencyTips);
-
+adminRouter.get('/emergency_tips', logger, adminAuthorization, AdminController.getEmergencyTips);
 module.exports = adminRouter;

@@ -168,6 +168,12 @@ def post_emergency_tips(token):
         print(f"Error: {e}")
 
 
+def get_tips(token):
+    print('\nfeedbacks\n')
+
+    header = {'Content-Type': 'application/json', 'authorization': token}
+    res = requests.get('http://localhost:4000/api/v1/admin/emergency_tips', headers=header)
+    print(dumps(res.json(), indent=4))
 
 
 
@@ -187,4 +193,5 @@ if __name__ == "__main__":
     #delete_notable(token)
     #get_notable(token)
     #get_feedbacks(token)
+    get_tips(token)
     post_emergency_tips(token)

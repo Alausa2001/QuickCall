@@ -474,6 +474,24 @@ class AdminController {
         
         }
     }
+
+
+    static async getEmergencyTips(req, res) {
+        try {
+            const tips = await EmergencyTips.findAll();
+            if (!tips) {
+                res.status(404).json({ status: "not found", message: 'No emergency tips uploaded yet' });
+            }
+            res.status(200).json({ status: "success", tips });
+            return;
+        } catch(err) {
+            res.status(500).json({
+                status: 'internal server error',
+                message: 'error occurred while retrieving emergency tips'
+            });
+            return
+        }
+    }
 }
 
 
