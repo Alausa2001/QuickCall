@@ -1188,6 +1188,10 @@ Body:   {}
 ```
 
 
+---
+DELETE: /admin/emergency_tip/tipId - To Delete an already uploaded tip
+---
+
 ##### Request
 
 ```
