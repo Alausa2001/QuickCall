@@ -168,7 +168,20 @@ def post_emergency_tips(token):
         print(f"Error: {e}")
 
 
+def get_tips(token):
+    print('\nall tips\n')
 
+    header = {'Content-Type': 'application/json', 'authorization': token}
+    res = requests.get('http://localhost:4000/api/v1/admin/emergency_tips', headers=header)
+    print(dumps(res.json(), indent=4))
+
+
+def delete_tip(token):
+    print('\n Delete of tip\n')
+
+    header = {'Content-Type': 'application/json', 'authorization': token}
+    res = requests.delete('http://localhost:4000/api/v1/admin/emergency_tip/2b41eed9-771d-41d0-96c0-bb1f6d20f1b1/delete', headers=header)
+    print(dumps(res.json(), indent=4))
 
 
 if __name__ == "__main__":
@@ -187,4 +200,7 @@ if __name__ == "__main__":
     #delete_notable(token)
     #get_notable(token)
     #get_feedbacks(token)
+    get_tips(token)
+    delete_tip(token)
+    get_tips(token)
     post_emergency_tips(token)
