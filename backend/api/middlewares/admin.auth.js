@@ -5,14 +5,14 @@ const { Admin } = require('../../models/associations');
 const { mysqldb } = require('../../models/engine/mysql');
 
 
-async function authorization(req, res, next) {
+async function adminAuthorization(req, res, next) {
   const auth = req.get('Authorization');
   if (auth && auth.split(' ')[0] === 'Bearer') {
     const token = auth.split(' ')[1];
     
     let username;
     try {
-      const decoded = jwt.verify(token, process.env.SECRET_KEY);
+      const decoded = jwt.verify(token, process.env.ADMIN_SECRET_KEY);
       username = decoded.username;
       if (!username) {
         res.status(401).json({ status: 'unathorized', message: 'admin not authorized' });
@@ -43,4 +43,4 @@ async function authorization(req, res, next) {
 }
 
 
-module.exports = authorization;
+module.exports = adminAuthorization;

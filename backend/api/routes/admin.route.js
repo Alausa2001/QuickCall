@@ -2,25 +2,30 @@
 
 const express = require('express');
 const logger = require('../middlewares/logger');
-const AdminController = require('../controllers/AdminController')
+const adminAuthorization = require('../middlewares/admin.auth');
+const AdminController = require('../controllers/AdminController');
 
 const adminRouter = express.Router();
 
-adminRouter.post('/add_states', logger, AdminController.addStates);
-adminRouter.get('/get_states', logger, AdminController.getStates);
 
-adminRouter.post('/add_local_governments', logger, AdminController.addLGA);
-adminRouter.get('/:stateId/get_local_governments', logger, AdminController.getLGAs);
-adminRouter.delete('/local_government/:LGAId/delete', logger, AdminController.deleteLGA);
+adminRouter.post('/signin', logger, AdminController.signin);
+adminRouter.post('/signup', logger, AdminController.signup);
 
-adminRouter.post('/add_emergency_contacts/:LGAId', logger, AdminController.addEmergencyContacts);
-adminRouter.get('/emergency_contacts/:LGAId', logger, AdminController.getContacts);
-adminRouter.delete('/emergency_contact/:contactId/delete', logger, AdminController.deleteEmergencyContact)
+adminRouter.post('/add_states', logger, adminAuthorization, AdminController.addStates);
+adminRouter.get('/get_states', logger, adminAuthorization, AdminController.getStates);
 
-adminRouter.post('/add_notable_personality/:LGAId', logger, AdminController.addNotablePersonality);
-adminRouter.get('/notable_people/:LGAId', logger, AdminController.getNotablePersonalities);
-adminRouter.delete('/notable_people/:notableId/delete', logger, AdminController.deleteNotablePersonality)
+adminRouter.post('/add_local_governments', logger, adminAuthorization, AdminController.addLGA);
+adminRouter.get('/:stateId/get_local_governments', logger, adminAuthorization, AdminController.getLGAs);
+adminRouter.delete('/local_government/:LGAId/delete', logger, adminAuthorization, AdminController.deleteLGA);
 
-adminRouter.get('/feedbacks/:startDate/:endDate', logger, AdminController.getUsersFeedbacks);
+adminRouter.post('/add_emergency_contacts/:LGAId', logger, adminAuthorization, AdminController.addEmergencyContacts);
+adminRouter.get('/emergency_contacts/:LGAId', logger, adminAuthorization, AdminController.getContacts);
+adminRouter.delete('/emergency_contact/:contactId/delete', logger, adminAuthorization, AdminController.deleteEmergencyContact)
+
+adminRouter.post('/add_notable_personality/:LGAId', logger, adminAuthorization, AdminController.addNotablePersonality);
+adminRouter.get('/notable_people/:LGAId', logger, adminAuthorization, AdminController.getNotablePersonalities);
+adminRouter.delete('/notable_people/:notableId/delete', logger, adminAuthorization, AdminController.deleteNotablePersonality)
+
+adminRouter.get('/feedbacks/:startDate/:endDate', logger, adminAuthorization, AdminController.getUsersFeedbacks);
 
 module.exports = adminRouter;
