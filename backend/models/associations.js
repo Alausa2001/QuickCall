@@ -6,6 +6,7 @@ const Feedbacks = require('./feedback');
 const EmergencyContacts = require('./emergency_contacts');
 const NotablePeople = require('./notable_people');
 const MedicalInfo = require('./medical');
+const EmergencyTips = require('./emergency_tips');
 
 MedicalInfo.belongsTo(User, {
     foreignKey: {
@@ -62,5 +63,10 @@ EmergencyContacts.sync();
 MedicalInfo.sync();
 Feedbacks.sync();
 Admin.sync();
+EmergencyTips.sync();
 
-module.exports = { Admin, User, State, LGA, NotablePeople, EmergencyContacts, MedicalInfo, Feedbacks };
+
+module.exports = {
+    Admin, User, State, LGA, NotablePeople,
+    EmergencyContacts, MedicalInfo, Feedbacks, EmergencyTips
+};

@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const { Op } = require('sequelize');
 const { mysqldb } = require('../../models/engine/mysql');
 const {
-    Admin, State, LGA, NotablePeople, EmergencyContacts, Feedbacks
+    Admin, State, LGA, NotablePeople, EmergencyContacts, Feedbacks, EmergencyTips,
 } = require('../../models/associations');
 
 
@@ -114,6 +114,7 @@ class AdminController {
         }
     }
 
+
     static async getStates(req, res) {
         try {
             const states = await State.findAll();
@@ -130,6 +131,7 @@ class AdminController {
             return;
         }
     }
+
 
     static async addLGA(req, res) {
         const { LGAs, stateId } = req.body;
@@ -184,6 +186,7 @@ class AdminController {
         }
     }
 
+
     static async getLGAs(req, res) {
 
         const stateId = req.params.stateId;
@@ -203,6 +206,7 @@ class AdminController {
             return;
         }
     }
+
 
     static async deleteLGA(req, res) {
         const { LGAId } = req.params;
@@ -226,6 +230,7 @@ class AdminController {
         return;
         }
     }
+
 
     static async addEmergencyContacts(req, res) {
 
@@ -267,6 +272,7 @@ class AdminController {
         }
     }
 
+
     static async getContacts(req, res) {
         /* returns all emergency contacts in a local government */
         const LGAId = req.params.LGAId;
@@ -286,6 +292,7 @@ class AdminController {
             return
         }
     }
+
 
     static async deleteEmergencyContact(req, res) {
         const { contactId } = req.params;
@@ -352,6 +359,7 @@ class AdminController {
         }
     }
 
+
     static async getNotablePersonalities(req, res) {
         /* returns all notable personalities in a local government */
         const LGAId = req.params.LGAId;
@@ -371,6 +379,7 @@ class AdminController {
             return
         }
     }
+
 
     static async deleteNotablePersonality(req, res) {
         const { notableId } = req.params;
@@ -394,6 +403,7 @@ class AdminController {
         return;
         }
     }
+
 
     static async getUsersFeedbacks(req, res) {
         let { startDate, endDate } = req.params;
@@ -422,6 +432,46 @@ class AdminController {
                 status: 'internal server error', message: "error occurred while retrieving feedbacks"
             });
             return;
+        }
+    }
+    
+
+    static async addEmergencyTips(req, res) {
+        const { tips } = req.body;
+        
+        if (!tips || !Array.isArray(tips) || tips.length === 0) {
+            res.status(400).json({ status: "bad request", message: "Tips not specified or invalid format" });
+            return;
+        }
+        
+        let tipDetails = [];
+        
+        try {
+            const existingTips = await EmergencyTips.findAll({ raw: true, attributes: ["title"] });
+            const existingTipTitles = existingTips.map((tip) => tip.title.toLowerCase());
+            
+            for (let tip of tips) {
+                console.log(tip);
+                if (existingTipTitles.includes(tip.title.toLowerCase())) {
+                    continue;
+                }
+                const obj = {
+                    category: tip.category.toLowerCase(),
+                    title: tip.title,
+                    description: tip.description,
+                };
+
+                const newTip = await mysqldb.createModel(EmergencyTips, obj);
+                tipDetails.push(newTip);
+            }
+            res.status(201).json({ status: "success", message: "Emergency tips added successfully", tipDetails });
+        } catch (err) {
+            console.log(err);
+            res.status(500).json({
+                status: "internal server error",
+                message: "Error occurred while adding emergency tips"
+            });
+        
         }
     }
 }
