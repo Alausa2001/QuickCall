@@ -346,7 +346,6 @@ Body:   {}
 Method: GET
 Path:   /api/v1/emergency/6.9234/3.8364/Medical
 Headers:   {
-  Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9sdXdhZmVyYW5taWFsYXVzYTIwMDFAZ21haWwuY29tIiwiaWF0IjoxNjk0OTY3Nzk3LCJleHAiOjE2OTUwMjE3OTd9.6MjRFAiJ6MmtHo-ZvJgjviSF8eBVkpO4KK1Hhk7mcIk',
   'Content-Type': 'application/json'
 }
 Body:   {}
@@ -656,6 +655,32 @@ Body:   {}
 ## Routes to populate database
 
 ---
+GET method: /admin/signin = admin signin
+---
+
+##### Request
+```
+Method: POST
+Path:   /api/v1/admin/signup
+Headers:   { Authorization: undefined, 'Content-Type': 'application/json' }
+Body:   { username: 'Quickcall', password: 'Quickcall' }
+```
+
+##### Response
+
+```
+{
+    "status": "success",
+    "admin": {
+        "AdminId": "d6e6cea4-f51e-47c5-ae7a-539e6584c500",
+        "username": "Quickcall",
+        "createdAt": "2023-09-20T09:17:46.000Z",
+        "updatedAt": "2023-09-20T09:17:46.000Z"
+    }
+}
+```
+
+---
 POST method: /admin/add_states = To add new states into the database
 ---
 
@@ -664,7 +689,7 @@ POST method: /admin/add_states = To add new states into the database
 ```
 Method: POST
 Path:   /api/v1/admin/add_states
-Headers:   { Authorization: undefined, 'Content-Type': 'application/json' }
+Headers:   { Authorization: token, 'Content-Type': 'application/json' }
 Body:   { states: [ 'Ogun', 'lAgos', 'AnAmbrA' ] }
 ---
 ```
@@ -703,7 +728,7 @@ GET method: /admin/get_states: Returns a list of all states and their IDs
 ```
 Method: GET
 Path:   /api/v1/admin/get_states
-Headers:   { Authorization: undefined, 'Content-Type': 'application/json' }
+Headers: { Authorization: token, 'Content-Type': 'application/json' }
 Body:   {}
 ```
 
@@ -746,8 +771,7 @@ POST method: /admin/add_local_governments = Adds local governments to a state
 ```
 Method: POST
 Path:   /api/v1/admin/add_local_governments
-Headers:   { Authorization: undefined, 'Content-Type': 'application/json' }
-Body:   {
+Headers:   { Authorization: token, 'Content-Type': 'application/json' }
   LGAs: [ 'Ijebu North', 'Abeokuta' ],
   stateId: 'ae6b4ac5-e75f-4b7b-814a-8fa7523fe7ab'
 }
@@ -785,7 +809,7 @@ GET method: /:stateId/get_local_governments
 ```
 Method: GET
 Path:   /api/v1/admin/ae6b4ac5-e75f-4b7b-814a-8fa7523fe7ab/get_local_governments
-Headers:   { Authorization: undefined, 'Content-Type': 'application/json' }
+Headers:   { Authorization: token, 'Content-Type': 'application/json' }
 Body:   {}
 ```
 
@@ -822,7 +846,7 @@ DELETE method: /admin/local_government/LGAId
 ```
 Method: DELETE
 Path:   /api/v1/admin/local_government/3834f40d-198c-4295-b5f4-079aadc96e73/delete
-Headers:   { Authorization: undefined, 'Content-Type': 'application/json' }
+Headers:   { Authorization: token, 'Content-Type': 'application/json' }
 Body:   {}
 ```
 
@@ -844,7 +868,7 @@ POST method: /admin/add_emergency_contacts/LGAId = adds an emergency contact det
 ```
 Method: POST
 Path:   /api/v1/admin/add_emergency_contacts/d6eef2e1-b588-413d-8c0d-b59ebae36ee3
-Headers:   { Authorization: undefined, 'Content-Type': 'application/json' }
+Headers:   { Authorization: token, 'Content-Type': 'application/json' }
 Body:   {
   emergencyType: 'Medical',
   emergencyNo: '12345566',
@@ -879,7 +903,7 @@ GET method: /admin/emergency_contacts/LGAId - list all emergency contacts under 
 ```
 Method: GET
 Path:   /api/v1/admin/emergency_contacts/d6eef2e1-b588-413d-8c0d-b59ebae36ee3
-Headers:   { Authorization: undefined, 'Content-Type': 'application/json' }
+Headers:   { Authorization: token, 'Content-Type': 'application/json' }
 Body:   {}
 ```
 
@@ -912,7 +936,7 @@ DELETE method: /admin/emergency_contact/contactId
 ```
 Method: DELETE
 Path:   /api/v1/admin/emergency_contact/35cc4899-f3db-4a8f-9868-c2ea42502aac/delete
-Headers:   { Authorization: undefined, 'Content-Type': 'application/json' }
+Headers:   { Authorization: token, 'Content-Type': 'application/json' }
 Body:   {}
 ```
 
@@ -936,7 +960,7 @@ POST method: /admin/add_notable_personality/LGAId - adds a notable personality u
 ```
 Method: POST
 Path:   /api/v1/admin/add_notable_personality/d6eef2e1-b588-413d-8c0d-b59ebae36ee3
-Headers:   { Authorization: undefined, 'Content-Type': 'application/json' }
+Headers:   { Authorization: token, 'Content-Type': 'application/json' }
 Body:   {
   position: 'Chief Medical Director, John Hopkins',
   personName: 'Khidr Rodiyah',
@@ -964,7 +988,7 @@ GET method: /admin/notable_people/LGAId
 ```
 Method: GET
 Path:   /api/v1/admin/notable_people/d6eef2e1-b588-413d-8c0d-b59ebae36ee3
-Headers:   { Authorization: undefined, 'Content-Type': 'application/json' }
+Headers:   { Authorization: token, 'Content-Type': 'application/json' }
 Body:   {}
 ```
 
@@ -1000,7 +1024,7 @@ DELETE method: /admin/notable_people/notableId
 ```
 Method: DELETE
 Path:   /api/v1/admin/notable_people/5e5ebc88-885f-4878-ac91-dd6a30a34d07/delete
-Headers:   { Authorization: undefined, 'Content-Type': 'application/json' }
+Headers:   { Authorization: token, 'Content-Type': 'application/json' }
 Body:   {}
 ```
 
@@ -1023,7 +1047,7 @@ GET method: /admin/feedbacks/:startDate/:endDate = To get all feedbacks received
 ```
 Method: GET
 Path:   /api/v1/admin/feedbacks/2023-07-15/2023-09-20
-Headers:   { Authorization: undefined, 'Content-Type': 'application/json' }
+Headers:   { Authorization: token, 'Content-Type': 'application/json' }
 Body:   {}
 ```
 
