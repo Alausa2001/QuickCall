@@ -9,7 +9,7 @@ def signup():
         'username': 'Quickcall', 'password': 'Quickcall',
     }
     header = {'Content-Type': 'application/json'}
-    res = requests.post('http://localhost:4000/api/v1/admin/signup', headers=header, json=data)
+    res = requests.post('http://qcall.feranmi.tech/api/v1/admin/signup', headers=header, json=data)
     print(res)
     print(dumps(res.json(), indent=4))
 
@@ -18,7 +18,7 @@ def signin():
         'username': 'Quickcall', 'password': 'Quickcall',
     }
     header = {'Content-Type': 'application/json'}
-    res = requests.post('http://localhost:4000/api/v1/admin/signin', headers=header, json=data)
+    res = requests.post('http://qcall.feranmi.tech/api/v1/admin/signin', headers=header, json=data)
     print(res.headers.get('Authorization'))
     print(res.json)
     print(dumps(res.json(), indent=4))
@@ -27,10 +27,10 @@ def signin():
 def post_states(token):
     
     data = {
-        "states": [ 'Ogun', 'lAgos', 'AnAmbrA']
+        "states": [ 'Ogun', 'lAgos', 'AnAmbrA', 'Oyo']
     }
     header = {'Content-Type': 'application/json', 'authorization': token}
-    res = requests.post('http://localhost:4000/api/v1/admin/add_states', json=data, headers=header)
+    res = requests.post('http://qcall.feranmi.tech/api/v1/admin/add_states', json=data, headers=header)
     print(dumps(res.json(), indent=4))
 
 def get_states(token):
@@ -44,10 +44,21 @@ def get_states(token):
 def post_lgas(token):
     
     data = {
-        "LGAs": [ 'Ijebu North', 'Abeokuta'], "stateId": "60a876fb-41b0-493b-bd41-857242326e28"
-    }
+        "LGAs": [
+            "Ibadan North",
+            "Ibadan South-West",
+            "Ibadan North-East",
+            "Ibadan South-East",
+            "Ibadan North-West",
+            "Ido",
+            "Lagelu",
+            "Egbeda",
+            "Ona-Ara",
+            "Oluyole"
+            ], "stateId": "c345d2c7-34ef-430c-89c4-e5c5005fcda7"
+        }
     header = {'Content-Type': 'application/json', 'authorization': token}
-    res = requests.post('http://localhost:4000/api/v1/admin/add_local_governments', json=data, headers=header)
+    res = requests.post('http://qcall.feranmi.tech/api/v1/admin/add_local_governments', json=data, headers=header)
     print(dumps(res.json(), indent=4))
 
 
@@ -55,7 +66,7 @@ def get_lgas(token):
     print('\n List of LGAs\n')
 
     header = {'Content-Type': 'application/json', 'authorization': token}
-    res = requests.get('http://localhost:4000/api/v1/admin/60a876fb-41b0-493b-bd41-857242326e28/get_local_governments', headers=header)
+    res = requests.get('http://qcall.feranmi.tech/api/v1/admin/c345d2c7-34ef-430c-89c4-e5c5005fcda7/get_local_governments', headers=header)
     print(dumps(res.json(), indent=4))
 
 def delete_lgas(token):
@@ -68,10 +79,10 @@ def delete_lgas(token):
 def post_contacts(token):
     print('\n postt of contacts of LGAs\n')
     data = {
-        "emergencyType": 'Medical', "emergencyNo": '12345566', "whatsappContact": "11111"
+        "emergencyType": 'police', "emergencyNo": '08160969769', "whatsappContact": "08160960769"
     }
     header = {'Content-Type': 'application/json', 'authorization': token}
-    res = requests.post('http://localhost:4000/api/v1/admin/add_emergency_contacts/62145996-90df-4de9-bdd6-e405fec7fdde', json=data, headers=header)
+    res = requests.post('http://qcall.feranmi.tech/api/v1/admin/add_emergency_contacts/5f1beb5a-68e2-4d5c-8911-ff0c181a2195', json=data, headers=header)
     print(dumps(res.json(), indent=4))
 
 
@@ -93,11 +104,11 @@ def delete_contact(token):
 def post_notable(token):
     print('\n postt of contacts of LGAs\n')
     data = {
-        "position": 'Chief Medical Director, John Hopkins', "personName": 'Khidr Rodiyah',
-        "whatsappContact": "091xxxxxxx", "phoneNo": '091111111'
+        "position": 'D.P.O', "personName": 'Pales Sodique',
+        "whatsappContact": "08160969769", "phoneNo": '08160969769'
     }
     header = {'Content-Type': 'application/json', 'authorization': token}
-    res = requests.post('http://localhost:4000/api/v1/admin/add_notable_personality/62145996-90df-4de9-bdd6-e405fec7fdde', json=data, headers=header)
+    res = requests.post('http://qcall.feranmi.tech/api/v1/admin/add_notable_personality/5f1beb5a-68e2-4d5c-8911-ff0c181a2195', json=data, headers=header)
     print(dumps(res.json(), indent=4))
 
 
@@ -154,7 +165,7 @@ def post_emergency_tips(token):
     headers = {'Content-Type': 'application/json', 'authorization': token}
 
     try:
-        response = requests.post('http://localhost:4000/api/v1/admin/add_emergency_tips', json=data, headers=headers)
+        response = requests.post('http://qcall.feranmi.tech/api/v1/admin/add_emergency_tips', json=data, headers=headers)
         response_json = response.json()
         
         if response.status_code == 201:
@@ -192,15 +203,15 @@ if __name__ == "__main__":
     #post_lgas(token)
     #get_lgas(token)
     #delete_lgas(token)
-    #post_contacts(token)
+    post_contacts(token)
     #get_contacts(token)
     #delete_contact(token)
-    #post_notable(token)
+    post_notable(token)
     #get_notable(token)
     #delete_notable(token)
     #get_notable(token)
     #get_feedbacks(token)
-    get_tips(token)
-    delete_tip(token)
-    get_tips(token)
+    #get_tips(token)
+    #delete_tip(token)
+    #get_tips(token)
     post_emergency_tips(token)
