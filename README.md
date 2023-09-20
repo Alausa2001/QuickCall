@@ -1094,11 +1094,121 @@ Body:   {}
 
 
 
+---
+POST: /admin/add_emergency_tips: To upload emergency tips. Receives an array of different tips. 
+---
+##### Request
+
+```
+Method: POST
+Path:   /api/v1/admin/add_emergency_tips
+Headers:   {
+  Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlF1aWNrY2FsbCIsImlhdCI6MTY5NTIyNjgxNSwiZXhwIjoxNjk1MjgwODE1fQ.hllRgKXnULRKdoFQI7hJUb74zch2Stc1fJq1w_FcmJs',
+  'Content-Type': 'application/json'
+}
+Body:   {
+  tips: [
+    {
+      "category": "police",
+      "title": "Police Tip 1",
+      "description": "Description of police tip 1.",
+    }
+  ]
+}
+```
+
+##### Rssponse
+
+```
+{
+    "status": "success",
+    "message": "Emergency tips added successfully",
+    "tipDetails": [
+        {
+            "tipId": "e2c9deb5-0061-4ece-a91f-8d8f4eac7f67",
+            "category": "police",
+            "title": "Police Tip 1",
+            "description": "Description of police tip 1.",
+            "updatedAt": "2023-09-20T16:20:15.938Z",
+            "createdAt": "2023-09-20T16:20:15.938Z"
+        }
+    ]
+}
+```
+
+---
+GET: /admin/emergency_tips - Returns a list of all uploaded tips in the database
+---
+
+##### Request
+
+```
+Method: GET
+Path:   /api/v1/admin/emergency_tips
+Headers:   {
+  Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlF1aWNrY2FsbCIsImlhdCI6MTY5NTIyNjgxNSwiZXhwIjoxNjk1MjgwODE1fQ.hllRgKXnULRKdoFQI7hJUb74zch2Stc1fJq1w_FcmJs',
+  'Content-Type': 'application/json'
+}
+Body:   {}
+```
 
 
+##### Response
+
+```
+{
+    "status": "success",
+    "tips": [
+        {
+            "tipId": "2c4d899a-0931-4bbc-a533-95fd6a717bf7",
+            "category": "fire",
+            "title": "Fire Safety Tip 1",
+            "description": "Description of fire safety tip 1.",
+            "createdAt": "2023-09-20T15:56:00.000Z",
+            "updatedAt": "2023-09-20T15:56:00.000Z"
+        },
+        {
+            "tipId": "d61f68d6-4f97-43a7-8872-33df68172a33",
+            "category": "medical",
+            "title": "Medical Tip 1",
+            "description": "Description of medical tip 1.",
+            "createdAt": "2023-09-20T16:03:10.000Z",
+            "updatedAt": "2023-09-20T16:03:10.000Z"
+        },
+        {
+            "tipId": "e2c9deb5-0061-4ece-a91f-8d8f4eac7f67",
+            "category": "police",
+            "title": "Police Tip 1",
+            "description": "Description of police tip 1.",
+            "updatedAt": "2023-09-20T16:20:15.938Z",
+            "createdAt": "2023-09-20T16:20:15.938Z"
+        }
+    ]
+}
+```
 
 
+##### Request
 
+```
+Method: DELETE
+Path:   /api/v1/admin/emergency_tip/2b41eed9-771d-41d0-96c0-bb1f6d20f1b1/delete
+Headers:   {
+  Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlF1aWNrY2FsbCIsImlhdCI6MTY5NTIyNjgxNSwiZXhwIjoxNjk1MjgwODE1fQ.hllRgKXnULRKdoFQI7hJUb74zch2Stc1fJq1w_FcmJs',
+  'Content-Type': 'application/json'
+}
+Body:   {}
+```
+
+##### Response
+
+```
+{
+    "status": "not found",
+    "message": "emergency tip not found, invalid id"
+}
+
+```
 
 
 
