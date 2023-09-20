@@ -5,19 +5,19 @@ from sys import argv
 
 def signup():
     data = {
-        'username': 'abdul', 'password': 'abdul',
+        'username': 'Quickcall', 'password': 'Quickcall',
     }
     header = {'Content-Type': 'application/json'}
-    res = requests.post('http://localhost:4000/api/v1/auth/signup', headers=header, json=data)
+    res = requests.post('http://localhost:4000/api/v1/admin/signup', headers=header, json=data)
     print(res)
     print(dumps(res.json(), indent=4))
 
 def signin():
     data = {
-        'username': 'abdul', 'password': 'abdul',
+        'username': 'Quickcall', 'password': 'Quickcall',
     }
     header = {'Content-Type': 'application/json'}
-    res = requests.post('http://localhost:4000/api/v1/auth/signin', headers=header, json=data)
+    res = requests.post('http://localhost:4000/api/v1/admin/signin', headers=header, json=data)
     print(res.headers.get('Authorization'))
     print(res.json)
     print(dumps(res.json(), indent=4))
@@ -69,4 +69,4 @@ if __name__ == "__main__":
     #profile(token)
     #contact(token)
     #feedback(token)
-    feedbacks(token)
+    #feedbacks(token)
