@@ -553,6 +553,16 @@ Body:   {}
             "lng": 3.9439,
             "name": "Oru Health Centre"
         }
+    ],
+     "emergencyTips": [
+        {
+            "tipId": "916c6abe-ed95-4f77-8428-ad726785627f",
+            "category": "medical",
+            "title": "Medical Tip 1",
+            "description": "Description of medical tip 1.",
+            "createdAt": "2023-09-20T11:17:23.000Z",
+            "updatedAt": "2023-09-20T11:17:23.000Z"
+        }
     ]
 }
 ```
