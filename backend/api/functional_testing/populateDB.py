@@ -123,19 +123,68 @@ def get_feedbacks(token):
     res = requests.get('http://localhost:4000/api/v1/admin/feedbacks/2023-07-15/2023-09-20', headers=header)
     print(dumps(res.json(), indent=4))
 
+import requests
+import json
+
+def post_emergency_tips(token):
+    
+    emergency_tips = [
+        {
+            "category": "Fire",
+            "title": "Fire Safety Tip 1",
+            "description": "Description of fire safety tip 1.",
+        },
+        {
+            "category": "Medical",
+            "title": "Medical Tip 1",
+            "description": "Description of medical tip 1.",
+        },
+        {
+            "category": "Police",
+            "title": "Police Tip 1",
+            "description": "Description of police tip 1.",
+            "Author": "Law Enforcement"
+        }
+    ]
+
+    data = {
+        "tips": emergency_tips
+    }
+
+    headers = {'Content-Type': 'application/json', 'authorization': token}
+
+    try:
+        response = requests.post('http://localhost:4000/api/v1/admin/add_emergency_tips', json=data, headers=headers)
+        response_json = response.json()
+        
+        if response.status_code == 201:
+            print("Emergency tips added successfully:")
+            print(json.dumps(response_json, indent=4))
+        else:
+            print(f"Failed to add emergency tips. Status Code: {response.status_code}")
+            print(json.dumps(response_json, indent=4))
+    
+    except requests.exceptions.RequestException as e:
+        print(f"Error: {e}")
+
+
+
+
+
 if __name__ == "__main__":
     signup()
     token = signin()
-    post_states(token)
-    get_states(token)
-    post_lgas(token)
-    get_lgas(token)
-    delete_lgas(token)
-    post_contacts(token)
-    get_contacts(token)
-    delete_contact(token)
-    post_notable(token)
-    get_notable(token)
-    delete_notable(token)
-    get_notable(token)
-    get_feedbacks(token)
+    #post_states(token)
+    #get_states(token)
+    #post_lgas(token)
+    #get_lgas(token)
+    #delete_lgas(token)
+    #post_contacts(token)
+    #get_contacts(token)
+    #delete_contact(token)
+    #post_notable(token)
+    #get_notable(token)
+    #delete_notable(token)
+    #get_notable(token)
+    #get_feedbacks(token)
+    post_emergency_tips(token)
