@@ -21,7 +21,7 @@ class EmergencyController {
         try {
             const locationDetails = await geocode(lat, lng);
             const localGovt = locationDetails.LGA;
-            console.log(localGovt)
+          
             if (localGovt) {
                 const lga = await mysqldb.get(LGA, { LGAName: localGovt.toLowerCase() });
 
