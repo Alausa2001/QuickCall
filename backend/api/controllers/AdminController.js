@@ -451,7 +451,6 @@ class AdminController {
             const existingTipTitles = existingTips.map((tip) => tip.title.toLowerCase());
             
             for (let tip of tips) {
-                console.log(tip);
                 if (existingTipTitles.includes(tip.title.toLowerCase())) {
                     continue;
                 }
@@ -490,6 +489,30 @@ class AdminController {
                 message: 'error occurred while retrieving emergency tips'
             });
             return
+        }
+    }
+
+
+    static async deleteEmergencyTip(req, res) {
+        const { tipId } = req.params;
+        
+        try {
+            const deleted = await EmergencyTips.destroy({ where: { tipId }});
+            if (deleted > 0) {
+                res.status(200).json({ status: "success", message: "deleted!" });
+                return;
+            }
+            res.status(404).json({
+                status: 'not found', message: 'emergency tip not found, invalid id'
+            });
+            return;
+
+        } catch(err) {
+            console.log(err);
+            res.status(500).json({
+                status: 'internal server error', message: "error occurred while deleting personality"
+        });
+        return;
         }
     }
 }
