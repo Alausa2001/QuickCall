@@ -108,7 +108,7 @@ def post_notable(token):
         "whatsappContact": "08160969769", "phoneNo": '08160969769'
     }
     header = {'Content-Type': 'application/json', 'authorization': token}
-    res = requests.post('http://qcall.feranmi.tech/api/v1/admin/add_notable_personality/5f1beb5a-68e2-4d5c-8911-ff0c181a2195', json=data, headers=header)
+    res = requests.post('http://localhost:4000/api/v1/admin/add_notable_personality/state/2ac8d648-0c63-464d-81a8-6c74f7b1a5e1', json=data, headers=header)
     print(dumps(res.json(), indent=4))
 
 
@@ -116,7 +116,7 @@ def get_notable(token):
     print('\n List of personalities of LGAs\n')
 
     header = {'Content-Type': 'application/json', 'authorization': token}
-    res = requests.get('http://localhost:4000/api/v1/admin/notable_people/62145996-90df-4de9-bdd6-e405fec7fdde', headers=header)
+    res = requests.get('http://localhost:4000/api/v1/admin/notable_people/state/2ac8d648-0c63-464d-81a8-6c74f7b1a5e1', headers=header)
     print(dumps(res.json(), indent=4))
 
 
@@ -124,7 +124,7 @@ def delete_notable(token):
     print('\n Delete of personality\n')
 
     header = {'Content-Type': 'application/json', 'authorization': token}
-    res = requests.delete('http://localhost:4000/api/v1/admin/notable_people/5e5ebc88-885f-4878-ac91-dd6a30a34d07/delete', headers=header)
+    res = requests.delete('http://localhost:4000/api/v1/admin/notable_people/state/2ac8d648-0c63-464d-81a8-6c74f7b1a5e1/delete', headers=header)
     print(dumps(res.json(), indent=4))
 
 def get_feedbacks(token):
@@ -199,19 +199,19 @@ if __name__ == "__main__":
     signup()
     token = signin()
     #post_states(token)
-    #get_states(token)
+    get_states(token)
     #post_lgas(token)
     #get_lgas(token)
     #delete_lgas(token)
-    post_contacts(token)
+    #post_contacts(token)
     #get_contacts(token)
     #delete_contact(token)
     post_notable(token)
-    #get_notable(token)
-    #delete_notable(token)
+    get_notable(token)
+    delete_notable(token)
     #get_notable(token)
     #get_feedbacks(token)
     #get_tips(token)
     #delete_tip(token)
     #get_tips(token)
-    post_emergency_tips(token)
+    #post_emergency_tips(token)
