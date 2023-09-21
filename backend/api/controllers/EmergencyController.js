@@ -33,6 +33,7 @@ class EmergencyController {
                     let notablePeople = await mysqldb.getAll(NotablePeople, { LGAId: lga.LGAId });
                     const notableState = await mysqldb.getAll(NotablePeopleState, { stateId: lga.stateId });
                     notablePeople = [ ...notablePeople, ...notableState];
+                    console.log(notableState)
 
                     const location = `${lat},${lng}`;
                     const nearby_places = await getNearbyPlaces(emergencyType, location);
