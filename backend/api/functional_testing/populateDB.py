@@ -67,7 +67,7 @@ def get_lgas(token):
     print('\n List of LGAs\n')
 
     header = {'Content-Type': 'application/json', 'authorization': token}
-    res = requests.get('http://localhost:4000/api/v1/admin/c345d2c7-34ef-430c-89c4-e5c5005fcda7/get_local_governments', headers=header)
+    res = requests.get('http://localhost:4000/api/v1/admin/0b445866-8f42-4e71-b26c-4b54102cb8c2/get_local_governments', headers=header)
     print(dumps(res.json(), indent=4))
 
 def delete_lgas(token):
@@ -109,7 +109,7 @@ def post_notable(token):
         "whatsappContact": "08160969769", "phoneNo": '08160969769'
     }
     header = {'Content-Type': 'application/json', 'authorization': token}
-    res = requests.post('http://localhost:4000/api/v1/admin/add_notable_personality/state/2ac8d648-0c63-464d-81a8-6c74f7b1a5e1', json=data, headers=header)
+    res = requests.post('http://localhost:4000/api/v1/admin/add_notable_personality/state/0b445866-8f42-4e71-b26c-4b54102cb8c2', json=data, headers=header)
     print(dumps(res.json(), indent=4))
 
 
@@ -117,7 +117,7 @@ def get_notable(token):
     print('\n List of personalities of LGAs\n')
 
     header = {'Content-Type': 'application/json', 'authorization': token}
-    res = requests.get('http://localhost:4000/api/v1/admin/notable_people/state/2ac8d648-0c63-464d-81a8-6c74f7b1a5e1', headers=header)
+    res = requests.get('http://localhost:4000/api/v1/admin/notable_people/state/0b445866-8f42-4e71-b26c-4b54102cb8c2', headers=header)
     print(dumps(res.json(), indent=4))
 
 
@@ -166,7 +166,7 @@ def post_emergency_tips(token):
     headers = {'Content-Type': 'application/json', 'authorization': token}
 
     try:
-        response = requests.post('http://qcall.feranmi.tech/api/v1/admin/add_emergency_tips', json=data, headers=headers)
+        response = requests.post('http://localhost:4000/api/v1/admin/add_emergency_tips', json=data, headers=headers)
         response_json = response.json()
         
         if response.status_code == 201:
@@ -199,17 +199,17 @@ def delete_tip(token):
 if __name__ == "__main__":
     signup()
     token = signin()
-    post_states(token)
+    #post_states(token)
     get_states(token)
     post_lgas(token)
-    get_lgas(token)
+    #get_lgas(token)
     #delete_lgas(token)
     #post_contacts(token)
     #get_contacts(token)
     #delete_contact(token)
-    #post_notable(token)
+    post_notable(token)
     get_notable(token)
-    delete_notable(token)
+    #delete_notable(token)
     #get_notable(token)
     #get_feedbacks(token)
     #get_tips(token)

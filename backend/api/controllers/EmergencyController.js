@@ -25,15 +25,14 @@ class EmergencyController {
           
             if (localGovt) {
                 const lga = await mysqldb.get(LGA, { LGAName: localGovt.toLowerCase() });
-
                 if (lga) {
                     const emergencyContacts = await mysqldb.getAll(EmergencyContacts,
                         { LGAId: lga.LGAId, emergencyType: emergencyType.toLowerCase() });
                     
                     let notablePeople = await mysqldb.getAll(NotablePeople, { LGAId: lga.LGAId });
+
                     const notableState = await mysqldb.getAll(NotablePeopleState, { stateId: lga.stateId });
                     notablePeople = [ ...notablePeople, ...notableState];
-                    console.log(notableState)
 
                     const location = `${lat},${lng}`;
                     const nearby_places = await getNearbyPlaces(emergencyType, location);
