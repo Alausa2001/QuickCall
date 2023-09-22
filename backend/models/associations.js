@@ -79,7 +79,7 @@ EmergencyContacts.sync();
 MedicalInfo.sync();
 Feedbacks.sync();
 Admin.sync();
-EmergencyTips.sync({alter: true});
+EmergencyTips.sync();
 NotablePeopleState.sync();
 
 

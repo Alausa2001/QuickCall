@@ -16,7 +16,7 @@ EmergencyTips.init({
         allowNull: false,
     },
     title: {
-        type: DataTypes.STRING(200), 
+        type: DataTypes.STRING(100), 
         allowNull: true,
     },
     description: {
