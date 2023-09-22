@@ -8,7 +8,7 @@ def signup():
         'username': 'Quickcall', 'password': 'Quickcall',
     }
     header = {'Content-Type': 'application/json'}
-    res = requests.post('http://localhost:4000/api/v1/admin/signup', headers=header, json=data)
+    res = requests.post('http://localhost:4000/api/v1/auth/signup', headers=header, json=data)
     print(res)
     print(dumps(res.json(), indent=4))
 
@@ -17,7 +17,7 @@ def signin():
         'username': 'Quickcall', 'password': 'Quickcall',
     }
     header = {'Content-Type': 'application/json'}
-    res = requests.post('http://localhost:4000/api/v1/admin/signin', headers=header, json=data)
+    res = requests.post('http://localhost:4000/api/v1/auth/signin', headers=header, json=data)
     print(res.headers.get('Authorization'))
     print(res.json)
     print(dumps(res.json(), indent=4))
@@ -34,7 +34,7 @@ def profile(token):
         'email': 'oluwaferanmialausa2001@gmail.com', 'phoneNo2': '07019302484'
     }
     header = {'Content-Type': 'application/json', 'authorization': token}
-    res = requests.post('http://localhost:4000/api/v1/profile/create', headers=header, json=data)
+    res = requests.post('http://qcall.feranmi.tech/api/v1/profile/create', headers=header, json=data)
     print(res.json)
     print(dumps(res.json(), indent=4))
     return res.headers.get('Authorization')
@@ -43,7 +43,8 @@ def profile(token):
 def contact(token):
     
     header = {'Content-Type': 'application/json', "authorization": token}
-    res = requests.get('http://localhost:4000/api/v1/emergency/6.9234/3.8364/Medical', headers=header)
+    res = requests.get('http://localhost:4000/api/v1/emergency/7.4433/3.9003/Medical', headers=header)
+    #print(res)
     print(dumps(res.json(), indent=4))
 
 
@@ -52,7 +53,7 @@ def feedback(token):
              "emergencyType": "Medical", "emergencyContact": "09999"
         }
     header = {'Content-Type': 'application/json', "authorization": token}
-    res = requests.post('http://localhost:4000/api/v1/emergency/feedback', headers=header, json=data)
+    res = requests.post('http://qcall.feranmi.tech/api/v1/emergency/feedback', headers=header, json=data)
     print(dumps(res.json(), indent=4))
 
 def feedbacks(token):

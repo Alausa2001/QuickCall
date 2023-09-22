@@ -2,7 +2,8 @@ const geocode = require('../utils/geocode');
 const getNearbyPlaces = require('../utils/nearby_places');
 const { mysqldb } = require('../../models/engine/mysql');
 const {
-    User, NotablePeople, EmergencyContacts, LGA, Feedbacks, EmergencyTips,
+    User, NotablePeople, EmergencyContacts, LGA,
+    Feedbacks, EmergencyTips,NotablePeopleState,
 } = require('../../models/associations');
 
 
@@ -21,14 +22,18 @@ class EmergencyController {
         try {
             const locationDetails = await geocode(lat, lng);
             const localGovt = locationDetails.LGA;
+          
             if (localGovt) {
                 const lga = await mysqldb.get(LGA, { LGAName: localGovt.toLowerCase() });
-
                 if (lga) {
                     const emergencyContacts = await mysqldb.getAll(EmergencyContacts,
                         { LGAId: lga.LGAId, emergencyType: emergencyType.toLowerCase() });
                     
-                    const notablePeople = await mysqldb.getAll(NotablePeople, { LGAId: lga.LGAId });
+                    let notablePeople = await mysqldb.getAll(NotablePeople, { LGAId: lga.LGAId });
+
+                    const notableState = await mysqldb.getAll(NotablePeopleState, { stateId: lga.stateId });
+                    notablePeople = [ ...notablePeople, ...notableState];
+
                     const location = `${lat},${lng}`;
                     const nearby_places = await getNearbyPlaces(emergencyType, location);
 
@@ -37,7 +42,7 @@ class EmergencyController {
                         );
 
                     res.status(200).json({
-                        status: "success", emergencyContacts, notablePeople, nearby_places, emergencyTips
+                        status: "success", emergencyContacts, notablePeople, nearby_places, emergencyTips, localGovt,
                     });
                     return;
                 }

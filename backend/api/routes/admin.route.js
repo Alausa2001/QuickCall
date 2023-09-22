@@ -24,7 +24,7 @@ adminRouter.delete('/emergency_contact/:contactId/delete', logger, adminAuthoriz
 
 adminRouter.post('/add_notable_personality/:LGAId', logger, adminAuthorization, AdminController.addNotablePersonality);
 adminRouter.get('/notable_people/:LGAId', logger, adminAuthorization, AdminController.getNotablePersonalities);
-adminRouter.delete('/notable_people/:notableId/delete', logger, adminAuthorization, AdminController.deleteNotablePersonality)
+adminRouter.delete('/notable_people/:notableId/delete', logger, adminAuthorization, AdminController.deleteNotablePersonality);
 
 adminRouter.get('/feedbacks/:startDate/:endDate', logger, adminAuthorization, AdminController.getUsersFeedbacks);
 
@@ -32,5 +32,8 @@ adminRouter.post('/add_emergency_tips', logger, adminAuthorization, AdminControl
 adminRouter.get('/emergency_tips', logger, adminAuthorization, AdminController.getEmergencyTips);
 adminRouter.delete('/emergency_tip/:tipId/delete', logger, adminAuthorization, AdminController.deleteEmergencyTip)
 
+adminRouter.post('/add_notable_personality/state/:stateId', logger, adminAuthorization, AdminController.addNotablePersonalityState);
+adminRouter.get('/notable_people/state/:stateId', logger, adminAuthorization, AdminController.getNotablePersonalitiesState);
+adminRouter.delete('/notable_people/state/:notableId/delete', logger, adminAuthorization, AdminController.deleteNotablePersonalityState);
 
 module.exports = adminRouter;

@@ -13,6 +13,7 @@ def signup():
     print(res)
     print(dumps(res.json(), indent=4))
 
+
 def signin():
     data = {
         'username': 'Quickcall', 'password': 'Quickcall',
@@ -27,7 +28,7 @@ def signin():
 def post_states(token):
     
     data = {
-        "states": [ 'Ogun', 'lAgos', 'AnAmbrA']
+        "states": [ 'Ogun', 'lAgos', 'AnAmbrA', 'Oyo']
     }
     header = {'Content-Type': 'application/json', 'authorization': token}
     res = requests.post('http://localhost:4000/api/v1/admin/add_states', json=data, headers=header)
@@ -44,8 +45,19 @@ def get_states(token):
 def post_lgas(token):
     
     data = {
-        "LGAs": [ 'Ijebu North', 'Abeokuta'], "stateId": "60a876fb-41b0-493b-bd41-857242326e28"
-    }
+        "LGAs": [
+            "Ibadan North",
+            "Ibadan South-West",
+            "Ibadan North-East",
+            "Ibadan South-East",
+            "Ibadan North-West",
+            "Ido",
+            "Lagelu",
+            "Egbeda",
+            "Ona-Ara",
+            "Oluyole"
+            ], "stateId": "0b445866-8f42-4e71-b26c-4b54102cb8c2"
+        }
     header = {'Content-Type': 'application/json', 'authorization': token}
     res = requests.post('http://localhost:4000/api/v1/admin/add_local_governments', json=data, headers=header)
     print(dumps(res.json(), indent=4))
@@ -55,7 +67,7 @@ def get_lgas(token):
     print('\n List of LGAs\n')
 
     header = {'Content-Type': 'application/json', 'authorization': token}
-    res = requests.get('http://localhost:4000/api/v1/admin/60a876fb-41b0-493b-bd41-857242326e28/get_local_governments', headers=header)
+    res = requests.get('http://localhost:4000/api/v1/admin/0b445866-8f42-4e71-b26c-4b54102cb8c2/get_local_governments', headers=header)
     print(dumps(res.json(), indent=4))
 
 def delete_lgas(token):
@@ -68,10 +80,10 @@ def delete_lgas(token):
 def post_contacts(token):
     print('\n postt of contacts of LGAs\n')
     data = {
-        "emergencyType": 'Medical', "emergencyNo": '12345566', "whatsappContact": "11111"
+        "emergencyType": 'police', "emergencyNo": '08160969769', "whatsappContact": "08160960769"
     }
     header = {'Content-Type': 'application/json', 'authorization': token}
-    res = requests.post('http://localhost:4000/api/v1/admin/add_emergency_contacts/62145996-90df-4de9-bdd6-e405fec7fdde', json=data, headers=header)
+    res = requests.post('http://localhost:4000/api/v1/admin/add_emergency_contacts/5f1beb5a-68e2-4d5c-8911-ff0c181a2195', json=data, headers=header)
     print(dumps(res.json(), indent=4))
 
 
@@ -93,11 +105,11 @@ def delete_contact(token):
 def post_notable(token):
     print('\n postt of contacts of LGAs\n')
     data = {
-        "position": 'Chief Medical Director, John Hopkins', "personName": 'Khidr Rodiyah',
-        "whatsappContact": "091xxxxxxx", "phoneNo": '091111111'
+        "position": 'D.P.O', "personName": 'Pales Sodique',
+        "whatsappContact": "08160969769", "phoneNo": '08160969769'
     }
     header = {'Content-Type': 'application/json', 'authorization': token}
-    res = requests.post('http://localhost:4000/api/v1/admin/add_notable_personality/62145996-90df-4de9-bdd6-e405fec7fdde', json=data, headers=header)
+    res = requests.post('http://localhost:4000/api/v1/admin/add_notable_personality/state/0b445866-8f42-4e71-b26c-4b54102cb8c2', json=data, headers=header)
     print(dumps(res.json(), indent=4))
 
 
@@ -105,7 +117,7 @@ def get_notable(token):
     print('\n List of personalities of LGAs\n')
 
     header = {'Content-Type': 'application/json', 'authorization': token}
-    res = requests.get('http://localhost:4000/api/v1/admin/notable_people/62145996-90df-4de9-bdd6-e405fec7fdde', headers=header)
+    res = requests.get('http://localhost:4000/api/v1/admin/notable_people/state/0b445866-8f42-4e71-b26c-4b54102cb8c2', headers=header)
     print(dumps(res.json(), indent=4))
 
 
@@ -113,7 +125,7 @@ def delete_notable(token):
     print('\n Delete of personality\n')
 
     header = {'Content-Type': 'application/json', 'authorization': token}
-    res = requests.delete('http://localhost:4000/api/v1/admin/notable_people/5e5ebc88-885f-4878-ac91-dd6a30a34d07/delete', headers=header)
+    res = requests.delete('http://localhost:4000/api/v1/admin/notable_people/state/2ac8d648-0c63-464d-81a8-6c74f7b1a5e1/delete', headers=header)
     print(dumps(res.json(), indent=4))
 
 def get_feedbacks(token):
@@ -188,19 +200,19 @@ if __name__ == "__main__":
     signup()
     token = signin()
     #post_states(token)
-    #get_states(token)
-    #post_lgas(token)
+    get_states(token)
+    post_lgas(token)
     #get_lgas(token)
     #delete_lgas(token)
     #post_contacts(token)
     #get_contacts(token)
     #delete_contact(token)
-    #post_notable(token)
-    #get_notable(token)
+    post_notable(token)
+    get_notable(token)
     #delete_notable(token)
     #get_notable(token)
     #get_feedbacks(token)
-    get_tips(token)
-    delete_tip(token)
-    get_tips(token)
-    post_emergency_tips(token)
+    #get_tips(token)
+    #delete_tip(token)
+    #get_tips(token)
+    #post_emergency_tips(token)

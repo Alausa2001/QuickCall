@@ -7,6 +7,8 @@ const EmergencyContacts = require('./emergency_contacts');
 const NotablePeople = require('./notable_people');
 const MedicalInfo = require('./medical');
 const EmergencyTips = require('./emergency_tips');
+const NotablePeopleState = require('./notable_people_state');
+
 
 MedicalInfo.belongsTo(User, {
     foreignKey: {
@@ -17,6 +19,7 @@ MedicalInfo.belongsTo(User, {
     }
 });
 
+
 Feedbacks.belongsTo(User, {
     foreignKey: {
         name: 'userId',
@@ -25,6 +28,7 @@ Feedbacks.belongsTo(User, {
         onUpdate: 'CASCADE',
     }
 });
+
 
 LGA.belongsTo(State, {
     foreignKey: {
@@ -35,6 +39,7 @@ LGA.belongsTo(State, {
     }
 });
 
+
 NotablePeople.belongsTo(LGA, {
     foreignKey: {
         name: 'LGAId',
@@ -43,6 +48,17 @@ NotablePeople.belongsTo(LGA, {
         onUpdate: 'CASCADE',
     }
 });
+
+
+NotablePeopleState.belongsTo(State, {
+    foreignKey: {
+        name: 'stateId',
+        allowNull: false,
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
+    }
+});
+
 
 EmergencyContacts.belongsTo(LGA, {
     foreignKey: {
@@ -64,10 +80,11 @@ MedicalInfo.sync();
 Feedbacks.sync();
 Admin.sync();
 EmergencyTips.sync();
+NotablePeopleState.sync();
 
 
 
 module.exports = {
-    Admin, User, State, LGA, NotablePeople,
+    Admin, User, State, LGA, NotablePeople, NotablePeopleState,
     EmergencyContacts, MedicalInfo, Feedbacks, EmergencyTips
 };
