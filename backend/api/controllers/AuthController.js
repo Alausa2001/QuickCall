@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { v4 } = require('uuid');
-const { User } = require('../../models/associations');
+const { User, MedicalInfo } = require('../../models/associations');
 const { mysqldb } = require('../../models/engine/mysql');
 const validatePhoneNo = require('../utils/validate_phoneno')
 
@@ -53,6 +53,8 @@ class AuthController {
 
         const filter = { username };
         let user;
+        let medInfo;
+        let profileFilled = false;
         try {
             user = await mysqldb.get(User, filter);
             if (!user) {
@@ -64,6 +66,10 @@ class AuthController {
                 res.status(400).json({ status: 'bad request', message: 'invalid password' });
                 return;
             }
+
+            if (user.firstName !== null && user.lastName !== null) profile = true;
+
+            medInfo = await mysqldb.get(MedicalInfo, { userId: user.userId });
             delete user.password;
         } catch(err) {
             console.log(err);
@@ -73,7 +79,9 @@ class AuthController {
         // generates jwt
         const token = jwt.sign({ username: user.username }, process.env.SECRET_KEY, { expiresIn: '15h' });
         res.setHeader('Access-Control-Expose-Headers', 'Authorization');
-        res.status(200).header('Authorization', `Bearer ${token}`).json({ status: 'success', user});
+        res.status(200).header('Authorization', `Bearer ${token}`).json({
+            status: 'success', user, medInfo, profileFilled,
+        });
         return
     }
 

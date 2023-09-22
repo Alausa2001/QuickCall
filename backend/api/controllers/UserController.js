@@ -104,7 +104,7 @@ class UserController {
         try {
             const user = await mysqldb.get(User, { username }, ['userId'])
             const medInfo = await mysqldb.get(MedicalInfo, { userId: user.userId});
-            res.status(201).json({ status: 'success', medicalInformaton: medInfo });
+            res.status(200).json({ status: 'success', medicalInformaton: medInfo });
         } catch(err) {
             console.log(err);
             res.status(500).json({ status: 'internal server error', message: 'An error occurred while retreiving your information'});
@@ -158,8 +158,12 @@ class UserController {
             }
 
             const updated = await mysqldb.update(MedicalInfo, { userId: user.userId }, obj);
+
+            const medInfo = await mysqldb.get(MedicalInfo, { userId: user.userId });
             if (updated[0] > 0) {
-              res.status(200).json({ status: "success", message: "medical information updated successfully"});
+              res.status(200).json({
+                status: "success", message: "medical information updated successfully", medInfo
+            });
               return;
             }
             res.status(404).json({status: "not found", message: "user's medical profile not found"});
@@ -202,7 +206,10 @@ class UserController {
         try {
             const updated = await mysqldb.update(User, { username }, obj)
             if (updated[0] > 0) {
-                res.status(200).json({ status: "success", message: "profile updated successfully" });
+                const userProfile = await mysqldb.get(User, { username })
+                res.status(200).json({
+                    status: "success", message: "profile updated successfully", userProfile
+                });
                 return;
             }
             res.status(404).json({status: "Not found", message: "profile not updated"});
