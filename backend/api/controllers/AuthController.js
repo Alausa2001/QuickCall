@@ -67,7 +67,7 @@ class AuthController {
                 return;
             }
 
-            if (user.firstName !== null && user.lastName !== null) profile = true;
+            if (user.firstName !== null && user.lastName !== null) profileFilled = true;
 
             medInfo = await mysqldb.get(MedicalInfo, { userId: user.userId });
             delete user.password;
