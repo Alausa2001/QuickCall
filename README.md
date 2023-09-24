@@ -1180,28 +1180,28 @@ Body:   {}
     "status": "success",
     "tips": [
         {
-            "tipId": "2c4d899a-0931-4bbc-a533-95fd6a717bf7",
-            "category": "fire",
-            "title": "Fire Safety Tip 1",
-            "description": "Description of fire safety tip 1.",
-            "createdAt": "2023-09-20T15:56:00.000Z",
-            "updatedAt": "2023-09-20T15:56:00.000Z"
-        },
-        {
-            "tipId": "d61f68d6-4f97-43a7-8872-33df68172a33",
+            "tipId": "7f256572-6b64-41cf-bf43-09bb5d609595",
             "category": "medical",
-            "title": "Medical Tip 1",
-            "description": "Description of medical tip 1.",
-            "createdAt": "2023-09-20T16:03:10.000Z",
-            "updatedAt": "2023-09-20T16:03:10.000Z"
+            "title": "Medical Emergency",
+            "description": "1. Don't Panic.",
+            "createdAt": "2023-09-24T10:38:06.000Z",
+            "updatedAt": "2023-09-24T10:38:06.000Z"
         },
         {
-            "tipId": "e2c9deb5-0061-4ece-a91f-8d8f4eac7f67",
-            "category": "police",
-            "title": "Police Tip 1",
-            "description": "Description of police tip 1.",
-            "updatedAt": "2023-09-20T16:20:15.938Z",
-            "createdAt": "2023-09-20T16:20:15.938Z"
+            "tipId": "b13438db-faa1-41df-88cf-e6fcc0f89517",
+            "category": "medical",
+            "title": "Medical Emergency",
+            "description": "2. Investigate the root cause.",
+            "createdAt": "2023-09-24T10:38:06.000Z",
+            "updatedAt": "2023-09-24T10:38:06.000Z"
+        },
+        {
+            "tipId": "ebcc8dd8-4a67-46ad-9d2c-9490fd3fe5cb",
+            "category": "medical",
+            "title": "Medical Emergency",
+            "description": "3. Call the Emergency Line",
+            "createdAt": "2023-09-24T10:38:06.000Z",
+            "updatedAt": "2023-09-24T10:38:06.000Z"
         }
     ]
 }
