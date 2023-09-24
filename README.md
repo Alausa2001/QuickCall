@@ -576,13 +576,15 @@ POST method: /emergency/feedback = To give feedback on a service
 Method: POST
 Path:   /api/v1/emergency/feedback
 Headers:   {
-  Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFiZHVsIiwiaWF0IjoxNjk1MTI2NTEyLCJleHAiOjE2OTUxODA1MTJ9.Bc2mdFk_24xY-1MQC2mYZiWCsAINjA3eDKPjwhNbb3M',
+  Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlF1aWNrY2FsbCIsImlhdCI6MTY5NTU0OTM4NCwiZXhwIjoxNjk1NjAzMzg0fQ.K-Q3FnetMhcVXuzaB-nGwmGommY47yq_u-d34_Dgz9M',
   'Content-Type': 'application/json'
 }
 Body:   {
   comment: 'The man said and I said, he said and I said she said and I said we said and I said. Thank you, I love quickcall. The best emergency app',
-  emergencyType: 'Medical',
-  emergencyContact: '09999'
+  emergencyType: 'Fire',
+  emergencyContact: '099',
+  rating: 2,
+  location: 'Ibadan North'
 }
 ```
 
@@ -593,14 +595,16 @@ Body:   {
     "status": "success",
     "message": "Feedback sent",
     "feedback": {
-        "feedbackId": "757b269a-4d23-4901-bbbb-94e717d0c3e1",
+        "feedbackId": "0104d5a1-fda7-47c3-bc56-395af8c81b56",
         "comment": "The man said and I said, he said and I said she said and I said we said and I said. Thank you, I love quickcall. The best emergency app",
-        "emergencyType": "Medical",
-        "emergencyContact": "09999",
-        "userId": "b37910c9-9387-4d5b-bd6b-8e88e13a69ba",
-        "username": "abdul",
-        "updatedAt": "2023-09-19T12:28:32.781Z",
-        "createdAt": "2023-09-19T12:28:32.781Z"
+        "emergencyType": "Fire",
+        "emergencyContact": "099",
+        "userId": "ab270f3c-d3a7-4061-8968-3a6039413649",
+        "username": "Quickcall",
+        "location": "ibadan north",
+        "rating": 2,
+        "updatedAt": "2023-09-24T09:56:26.888Z",
+        "createdAt": "2023-09-24T09:56:26.888Z"
     }
 }
 ```
