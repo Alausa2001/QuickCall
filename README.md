@@ -1107,16 +1107,16 @@ POST: /admin/add_emergency_tips: To upload emergency tips. Receives an array of 
 Method: POST
 Path:   /api/v1/admin/add_emergency_tips
 Headers:   {
-  Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlF1aWNrY2FsbCIsImlhdCI6MTY5NTIyNjgxNSwiZXhwIjoxNjk1MjgwODE1fQ.hllRgKXnULRKdoFQI7hJUb74zch2Stc1fJq1w_FcmJs',
+  Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlF1aWNrY2FsbCIsImlhdCI6MTY5NTU1MTg4NiwiZXhwIjoxNjk1NjA1ODg2fQ.gTPRB3_kGbAnV_uDXz-NQAI53rW0nbyVf0VjZ0R0dl4',
   'Content-Type': 'application/json'
 }
 Body:   {
+  category: 'medical',
+  title: 'Medical Emergency',
   tips: [
-    {
-      "category": "police",
-      "title": "Police Tip 1",
-      "description": "Description of police tip 1.",
-    }
+    { description: '3. Call the Emergency Line' },
+    { description: "1. Don't Panic." },
+    { description: '2. Investigate the root cause.' }
   ]
 }
 ```
@@ -1129,12 +1129,28 @@ Body:   {
     "message": "Emergency tips added successfully",
     "tipDetails": [
         {
-            "tipId": "e2c9deb5-0061-4ece-a91f-8d8f4eac7f67",
-            "category": "police",
-            "title": "Police Tip 1",
-            "description": "Description of police tip 1.",
-            "updatedAt": "2023-09-20T16:20:15.938Z",
-            "createdAt": "2023-09-20T16:20:15.938Z"
+            "tipId": "ebcc8dd8-4a67-46ad-9d2c-9490fd3fe5cb",
+            "category": "medical",
+            "title": "Medical Emergency",
+            "description": "3. Call the Emergency Line",
+            "updatedAt": "2023-09-24T10:38:06.747Z",
+            "createdAt": "2023-09-24T10:38:06.747Z"
+        },
+        {
+            "tipId": "7f256572-6b64-41cf-bf43-09bb5d609595",
+            "category": "medical",
+            "title": "Medical Emergency",
+            "description": "1. Don't Panic.",
+            "updatedAt": "2023-09-24T10:38:06.769Z",
+            "createdAt": "2023-09-24T10:38:06.769Z"
+        },
+        {
+            "tipId": "b13438db-faa1-41df-88cf-e6fcc0f89517",
+            "category": "medical",
+            "title": "Medical Emergency",
+            "description": "2. Investigate the root cause.",
+            "updatedAt": "2023-09-24T10:38:06.783Z",
+            "createdAt": "2023-09-24T10:38:06.783Z"
         }
     ]
 }
