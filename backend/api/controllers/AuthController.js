@@ -22,7 +22,7 @@ class AuthController {
 
         const user = await mysqldb.get(User, filter);
         if (user) {
-            res.status(400).json({ status: 'failed', message: 'user exists, use another username' });
+            res.status(403).json({ status: 'failed', message: 'user exists, use another username' });
             return;
         }
         try {

@@ -64,7 +64,7 @@ class EmergencyController {
 
     static async giveFeedback(req, res) {
         const username = res.locals.username;
-        const { comment, emergencyType, emergencyContact } = req.body;
+        const { comment, emergencyType, emergencyContact, rating, location } = req.body;
 
         if (!comment) {
             res.status(400).json({
@@ -77,7 +77,8 @@ class EmergencyController {
             const user = await mysqldb.get(User, { username });
             if (user) {
                 const obj = {
-                    comment, emergencyType, emergencyContact, userId: user.userId, username: user.username,
+                    comment, emergencyType, emergencyContact, userId: user.userId,
+                    username: user.username, location: location.toLowerCase(), rating,
                 };
 
                 const feedback = await mysqldb.createModel(Feedbacks, obj);
