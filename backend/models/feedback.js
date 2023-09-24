@@ -26,6 +26,14 @@ Feedbacks.init({
         type: DataTypes.STRING(15), 
         allowNull: true,
     },
+    location: {
+        type: DataTypes.STRING(15), 
+        allowNull: true,   
+    },
+    rating: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+    }
 }, {
     sequelize,
     tableName: 'feedbacks',

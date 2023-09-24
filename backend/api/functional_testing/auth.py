@@ -43,17 +43,17 @@ def profile(token):
 def contact(token):
     
     header = {'Content-Type': 'application/json', "authorization": token}
-    res = requests.get('http://localhost:4000/api/v1/emergency/7.4433/3.9003/Medical', headers=header)
+    res = requests.get('http://qcall.feranmi.tech/api/v1/emergency/7.4433/3.9003/Medical', headers=header)
     #print(res)
     print(dumps(res.json(), indent=4))
 
 
 def feedback(token):
     data = { 'comment': "The man said and I said, he said and I said she said and I said we said and I said. Thank you, I love quickcall. The best emergency app",
-             "emergencyType": "Medical", "emergencyContact": "09999"
+             "emergencyType": "Fire", "emergencyContact": "099", "rating": 2, "location": "Ibadan North"
         }
     header = {'Content-Type': 'application/json', "authorization": token}
-    res = requests.post('http://qcall.feranmi.tech/api/v1/emergency/feedback', headers=header, json=data)
+    res = requests.post('http://localhost:4000/api/v1/emergency/feedback', headers=header, json=data)
     print(dumps(res.json(), indent=4))
 
 def feedbacks(token):
@@ -69,5 +69,5 @@ if __name__ == "__main__":
     token = signin()
     #profile(token)
     contact(token)
-    #feedback(token)
+    feedback(token)
     #feedbacks(token)

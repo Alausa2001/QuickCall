@@ -26,7 +26,7 @@ class AdminController {
 
         const user = await mysqldb.get(Admin, filter);
         if (user) {
-            res.status(400).json({ status: 'failed', message: 'user exists, use another username' });
+            res.status(403).json({ status: 'failed', message: 'user exists, use another username' });
             return;
         }
         try {
@@ -438,16 +438,31 @@ class AdminController {
     
 
     static async addEmergencyTips(req, res) {
-        const { tips } = req.body;
+        const { title, category, tips } = req.body;
         
         if (!tips || !Array.isArray(tips) || tips.length === 0) {
             res.status(400).json({ status: "bad request", message: "Tips not specified or invalid format" });
             return;
         }
-        
+
+        if (!title) {
+            res.status(400).json({ status: "bad request", message: "Tip title not specified" });
+            return;
+        }
+
+        if (!category) {
+            res.status(400).json({ status: "bad request", message: "emergency type not specified" });
+            return;
+        }
+
         let tipDetails = [];
         
         try {
+            for (let tip of tips) {
+                tip.category = category;
+                tip.title = title;
+            }
+
             const existingTips = await EmergencyTips.findAll({ raw: true, attributes: ["title"] });
             const existingTipTitles = existingTips.map((tip) => tip.title.toLowerCase());
             
@@ -463,6 +478,10 @@ class AdminController {
 
                 const newTip = await mysqldb.createModel(EmergencyTips, obj);
                 tipDetails.push(newTip);
+            }
+            if (!tipDetails[0]) {
+                res.status(403).json({ status: "success", message: "Title already exists"});
+                return;
             }
             res.status(201).json({ status: "success", message: "Emergency tips added successfully", tipDetails });
         } catch (err) {

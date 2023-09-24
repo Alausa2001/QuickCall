@@ -77,7 +77,7 @@ LGA.sync();
 NotablePeople.sync();
 EmergencyContacts.sync();
 MedicalInfo.sync();
-Feedbacks.sync();
+Feedbacks.sync({alter: true});
 Admin.sync();
 EmergencyTips.sync();
 NotablePeopleState.sync();
