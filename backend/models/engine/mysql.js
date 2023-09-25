@@ -14,6 +14,7 @@ const sequelize = new Sequelize(database, user, pwd, {
   host: 'localhost',
   dialect: 'mysql',
   logging: false,
+  timezone: "+01:00",
 });
 
 class MysqlClient {
