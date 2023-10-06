@@ -1,5 +1,7 @@
 /* I will remove the smtp credentials */
-// Not working yet
+// Not working yet - On the dashboard, it says email sent
+// but it isn't getting delivered to the destination
+
 require('dotenv').config();
 const nodemailer = require('nodemailer');
 

@@ -1,6 +1,11 @@
+/* 
+We wanted to use this to dynamically get emergency tips
+but openai allowed limited requests for free accounts
+*/
+
 const { OpenAI } = require('openai')
 
-const openai = new OpenAI({ apiKey: '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'});
+const openai = new OpenAI({ apiKey: key});
 
 async function main() {
   const completion = await openai.completions.create({

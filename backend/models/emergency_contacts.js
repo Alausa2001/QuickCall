@@ -16,11 +16,11 @@ EmergencyContacts.init({
         allowNull: false,
     },
     emergencyNo: {
-        type: DataTypes.STRING(15), // Adjust the length as needed
+        type: DataTypes.STRING(15), 
         allowNull: true,
     },
     whatsappContact: {
-        type: DataTypes.STRING(15), // Adjust the length as needed
+        type: DataTypes.STRING(15), 
         allowNull: true,
     },
 }, {

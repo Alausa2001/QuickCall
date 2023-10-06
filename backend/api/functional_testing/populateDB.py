@@ -9,7 +9,7 @@ def signup():
         'username': 'Quickcall', 'password': 'Quickcall',
     }
     header = {'Content-Type': 'application/json'}
-    res = requests.post('http://localhost:4000/api/v1/admin/signup', headers=header, json=data)
+    res = requests.post('http://qcall.feranmi.tech/api/v1/admin/signup', headers=header, json=data)
     print(res)
     print(dumps(res.json(), indent=4))
 
@@ -19,7 +19,7 @@ def signin():
         'username': 'Quickcall', 'password': 'Quickcall',
     }
     header = {'Content-Type': 'application/json'}
-    res = requests.post('http://localhost:4000/api/v1/admin/signin', headers=header, json=data)
+    res = requests.post('http://qcall.feranmi.tech/api/v1/admin/signin', headers=header, json=data)
     print(res.headers.get('Authorization'))
     print(res.json)
     print(dumps(res.json(), indent=4))
@@ -141,22 +141,42 @@ import json
 def post_emergency_tips(token):
     
     emergency_tips = {
-        "category": "medical",
-        "title": "Medical Emergency",
-        "tips": [
-            {
-                "category": "Fire",
-                "title": "Fire Safety Tip 1",
-                "description": "3. Call the Emergency Line (Call)\n\tAs a preventive measure, you should endeavor to cram an emergency number for easy reach. The general emergency line for Nigeria is 112. Once you call the ambulance and relay some of the fact you garnered from tip 2 above, quickly return to the patient and try to care for them pending the arrival of the health professionals. When you call the emergency line, try to maintain calmness and give the responder any vital information you may have from your quick investigation such as the patient level of consciousness. You should not delay calling the ambulance as getting medical help at the right time can help you save a person’s life. If you are not sure about what the person is suffering from, you can make him lay down in a comfortable position. In case of fractures, you should not try to move the broken limb. In case the patient is bleeding, you can try to lift up the body part above the level of heart as this can help in controlling the bleeding.",
-                },
-            {
-                "description": "1. Don’t Panic\n\tWitnessing an accident or another medical emergency can be scary and overwhelming, but you have to  stay calm to help the victim . So, take a deep breath, calm your nerves before proceeding to tip"
-            },
-            {
-                "description": "2. Investigate the root cause (Check)\n\tBefore attempting to help a patient in an emergency, first check for anything unsafe around you then identify the different possible root cause(s) of the emergency. Different situations require different approaches. Try to find out the main cause, such as: Is the person conscious? If they are, you can ask them directly what the problem is. If the patient is unconscious, look for injury marks on the body and look out for insect bites or bleeding. You should also pay attention to the symptoms. For example, a patient suffering from heart attack may be holding their chest or complain of chest pain. Or a patient who is choking on something may look confused and gasping for breath. Ensure that your environment is safe for you and the victim, thereafter you can identify the problem before deciding what is next to take.",
-            }
+    "category": "police",
+    "title": "Things to do during a police emergency",
+    "tips": [
+        {
+            "description": "Call your local emergency number to report the situation."
+        },
+        {
+            "description": "Remain as safe as possible and out of harm's way until the police arrive."
+        },
+        {
+            "description": "Provide the dispatcher with clear and accurate information about the emergency."
+        },
+        {
+            "description": "If it's safe to do so, document the incident with photos or videos as evidence."
+        },
+        {
+            "description": "Cooperate with arriving officers, follow their instructions, and stay calm."
+        },
+        {
+            "description": "Do not take matters into your own hands; let the police handle the situation."
+        },
+        {
+            "description": "Keep a safe distance from any potentially dangerous individuals involved."
+        },
+        {
+            "description": "If you're a witness, be prepared to provide a statement to the police."
+        },
+        {
+            "description": "Follow up with law enforcement or legal authorities as needed to support the case."
+        },
+        {
+            "description": "Consider seeking support or counseling if the incident has caused emotional distress."
+        }
         ]
     }
+
     
 
    
@@ -164,7 +184,7 @@ def post_emergency_tips(token):
     headers = {'Content-Type': 'application/json', 'authorization': token}
 
     try:
-        response = requests.post('http://localhost:4000/api/v1/admin/add_emergency_tips', json=emergency_tips, headers=headers)
+        response = requests.post('http://qcall.feranmi.tech/api/v1/admin/add_emergency_tips', json=emergency_tips, headers=headers)
         response_json = response.json()
         
         if response.status_code == 201:
