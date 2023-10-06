@@ -10,7 +10,7 @@ const {
 
 class EmergencyController {
     static async getContacts(req, res) {
-        const { lat, lng, emergencyType } = req.params;
+        let { lat, lng, emergencyType } = req.params;
 
         if (!lat || !lng) {
             res.status(500).json({
@@ -35,6 +35,9 @@ class EmergencyController {
                     notablePeople = [ ...notablePeople, ...notableState];
 
                     const location = `${lat},${lng}`;
+		    if (emergencyType.toLowerCase() === 'fire') {
+			    emergencyType = 'fire emergency';
+		    }
                     const nearby_places = await getNearbyPlaces(emergencyType, location);
 
                     const emergencyTips = await mysqldb.getAll(

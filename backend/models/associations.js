@@ -77,10 +77,11 @@ LGA.sync();
 NotablePeople.sync();
 EmergencyContacts.sync();
 MedicalInfo.sync();
-Feedbacks.sync({alter: true});
+Feedbacks.sync();
 Admin.sync();
 EmergencyTips.sync();
 NotablePeopleState.sync();
+
 
 
 module.exports = {
