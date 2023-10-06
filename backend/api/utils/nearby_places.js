@@ -4,6 +4,7 @@ const axios = require('axios');
 async function getNearbyPlaces(keyword, location, radius = 15000) {
     try {
         const baseUrl = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json';
+        if (keyword.toLowerCase() === 'fire') keyword = "Fire Emergency";
 
         const params = {
             key: process.env.MAP_KEY,
@@ -28,11 +29,6 @@ async function getNearbyPlaces(keyword, location, radius = 15000) {
                         lng: place.geometry.location.lng,
                         name: place.name,
                     };
-
-                    if (place.opening_hours) {
-                        placeInfo.opening_hours = place.opening_hours;
-                    }
-
                     placesInfo.push(placeInfo);
                 }
 
