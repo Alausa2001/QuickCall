@@ -13,7 +13,7 @@ async function send_sms(phoneNo) {
                 msisdn: '2348160969769',
                 message: 'Nodejs Sending SMS',
                 username: 'alausa',
-                password: 'Feranmi2001'
+                password: 'Fer6557667676565'
             }
         };
         const response = await axios.request(options)

@@ -17,7 +17,7 @@ def signin():
         'username': 'Quickcall', 'password': 'Quickcall',
     }
     header = {'Content-Type': 'application/json'}
-    res = requests.post('http://localhost:4000/api/v1/auth/signin', headers=header, json=data)
+    res = requests.post('http://qcall.feranmi.tech/api/v1/auth/signin', headers=header, json=data)
     print(res.headers.get('Authorization'))
     print(res.json)
     print(dumps(res.json(), indent=4))
@@ -65,9 +65,9 @@ def feedbacks(token):
     print(dumps(res.json(), indent=4))
 
 if __name__ == "__main__":
-    signup()
+    #signup()
     token = signin()
     #profile(token)
     contact(token)
-    feedback(token)
+    #feedback(token)
     #feedbacks(token)

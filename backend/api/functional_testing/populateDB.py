@@ -9,7 +9,7 @@ def signup():
         'username': 'Quickcall', 'password': 'Quickcall',
     }
     header = {'Content-Type': 'application/json'}
-    res = requests.post('http://localhost:4000/api/v1/admin/signup', headers=header, json=data)
+    res = requests.post('http://qcall.feranmi.tech/api/v1/admin/signup', headers=header, json=data)
     print(res)
     print(dumps(res.json(), indent=4))
 
@@ -19,7 +19,7 @@ def signin():
         'username': 'Quickcall', 'password': 'Quickcall',
     }
     header = {'Content-Type': 'application/json'}
-    res = requests.post('http://localhost:4000/api/v1/admin/signin', headers=header, json=data)
+    res = requests.post('http://qcall.feranmi.tech/api/v1/admin/signin', headers=header, json=data)
     print(res.headers.get('Authorization'))
     print(res.json)
     print(dumps(res.json(), indent=4))
@@ -141,20 +141,42 @@ import json
 def post_emergency_tips(token):
     
     emergency_tips = {
-        "category": "medical",
-        "title": "Medical Emergency",
-        "tips": [
-            {
-                "description": "3. Call the Emergency Line",
-            },
-            {
-                "description": "1. Don't Panic."
-            },
-            {
-                "description": "2. Investigate the root cause.",
-            }
+    "category": "police",
+    "title": "Things to do during a police emergency",
+    "tips": [
+        {
+            "description": "Call your local emergency number to report the situation."
+        },
+        {
+            "description": "Remain as safe as possible and out of harm's way until the police arrive."
+        },
+        {
+            "description": "Provide the dispatcher with clear and accurate information about the emergency."
+        },
+        {
+            "description": "If it's safe to do so, document the incident with photos or videos as evidence."
+        },
+        {
+            "description": "Cooperate with arriving officers, follow their instructions, and stay calm."
+        },
+        {
+            "description": "Do not take matters into your own hands; let the police handle the situation."
+        },
+        {
+            "description": "Keep a safe distance from any potentially dangerous individuals involved."
+        },
+        {
+            "description": "If you're a witness, be prepared to provide a statement to the police."
+        },
+        {
+            "description": "Follow up with law enforcement or legal authorities as needed to support the case."
+        },
+        {
+            "description": "Consider seeking support or counseling if the incident has caused emotional distress."
+        }
         ]
     }
+
     
 
    
@@ -162,7 +184,7 @@ def post_emergency_tips(token):
     headers = {'Content-Type': 'application/json', 'authorization': token}
 
     try:
-        response = requests.post('http://localhost:4000/api/v1/admin/add_emergency_tips', json=emergency_tips, headers=headers)
+        response = requests.post('http://qcall.feranmi.tech/api/v1/admin/add_emergency_tips', json=emergency_tips, headers=headers)
         response_json = response.json()
         
         if response.status_code == 201:
@@ -210,5 +232,5 @@ if __name__ == "__main__":
     #get_feedbacks(token)
     #get_tips(token)
     #delete_tip(token)
-    get_tips(token)
-    #post_emergency_tips(token)
+    #get_tips(token)
+    post_emergency_tips(token)
