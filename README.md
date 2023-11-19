@@ -1,10 +1,6 @@
 # QuickCall
 This app can be a valuable tool for people who are looking for quick and easy access to emergency assistance. It can also help people to stay safe in an emergency situation. We are building this app for an hackathon.
 
-We came in third place in the hackathon
-
-[!(https![third place](https://github.com/Alausa2001/QuickCall/assets/101368817/b5df4cd2-e862-4480-83d5-1802df33cfee)
-
 
 # TEAM
 
@@ -14,11 +10,17 @@ Olanrewaju Adam(Android) - [Github Profile](https://github.com/Dharmzeey)
 
 Aishah Boladale(UI/UX) - [LinkedIn](https://www.linkedin.com/in/aisha-boladale-608417249/)
 
+We came in third in the hackathon
+
+![third place](https://github.com/Alausa2001/QuickCall/assets/101368817/e17d3016-16a2-4274-988f-55c019d5c985)
+
+
 Click [HERE](https://www.figma.com/file/Unf9fq1uk5n9ohhi8A0pNe/Geolocation-App-Interface?type=design&node-id=0-1&mode=design&t=InWKp37pYrwUf8FY-0) to view the design on figma
 
 Click [HERE](https://github.com/Dharmzeey/QuickCall/tree/master) to view the android app source code
 
 [LINK](https://drive.google.com/drive/folders/1_aQyzaW96ofK3mTS14OzO0WEiUAdVeVk) to apk, demo video and screenshots
+
 
 # API DOCUMENTATION
 Documetation of the API endpoints for QuickCall
