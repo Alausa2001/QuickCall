@@ -1,6 +1,12 @@
 # QuickCall
 This app can be a valuable tool for people who are looking for quick and easy access to emergency assistance. It can also help people to stay safe in an emergency situation. We are building this app for an hackathon
 
+
+Click [!HERE](https://www.figma.com/file/Unf9fq1uk5n9ohhi8A0pNe/Geolocation-App-Interface?type=design&node-id=0-1&mode=design&t=InWKp37pYrwUf8FY-0) to view the design on figma
+
+Click [!HERE](https://github.com/Dharmzeey/QuickCall/tree/master) to view the android app source code
+
+
 # API DOCUMENTATION
 Documetation of the API endpoints for QuickCall
 
