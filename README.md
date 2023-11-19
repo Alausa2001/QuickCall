@@ -3,7 +3,8 @@ This app can be a valuable tool for people who are looking for quick and easy ac
 
 We came in third place in the hackathon
 
-[!(https://github.com/Alausa2001/QuickCall/blob/main/third%20place.jpg)]
+[!(https![third place](https://github.com/Alausa2001/QuickCall/assets/101368817/b5df4cd2-e862-4480-83d5-1802df33cfee)
+
 
 # TEAM
 
