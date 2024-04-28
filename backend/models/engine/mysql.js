@@ -64,7 +64,6 @@ class MysqlClient {
         bulk.push(obj.dataValues);
       }
       return bulk;
-      return newModel.dataValues;
     }
     const newModel = await model.create(obj);
     return newModel.dataValues;
