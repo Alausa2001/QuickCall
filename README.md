@@ -26,7 +26,7 @@ Click [HERE](https://github.com/Dharmzeey/QuickCall/tree/master) to view the and
 Documetation of the API endpoints for QuickCall
 
 #### Base URL 
-``` http://qcall.feranmi.tech/api/v1 ```
+``` https://qcall.feranmi.tech/api/v1 ```
 
 #### NOTE
 1. Client-Server data transfer (parameters as used in this documentation) should be via the standard JSON format
